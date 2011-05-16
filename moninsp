@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+COLS = `tput cols`.to_i
+ROWS = `tput lines`.to_i
+
+lineno = 0
+`git log -n #{ROWS * 60} | grep Date | awk '{print $5}' |
+awk -F: '{print $1, $2}' | uniq -c`.each_line do |line|
+  lineno += 1
+  break if lineno == ROWS
+
+  c, h, m = line.split(' ')
+  puts "#{h}:#{m} #{'*' * c.to_i}"
+end
