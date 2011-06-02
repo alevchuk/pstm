@@ -1,10 +1,18 @@
 #!/usr/bin/env ruby
 
+GITDIR = "/home_girkelab/alevchuk/020-ib-nfs-failure/#{`hostname`.chomp}/.git"
+
+SCREENS = if ARGV.size > 0
+  ARGV[0].to_i
+else
+  1
+end
+
 COLS = `tput cols`.to_i
-ROWS = `tput lines`.to_i
+ROWS = `tput lines`.to_i * SCREENS
 
 lineno = 0
-`git log -n #{ROWS * 60} | grep Date | awk '{print $5}' |
+`git --git-dir=#{GITDIR} log -n #{ROWS * 60} | grep Date | awk '{print $5}' |
 awk -F: '{print $1, $2}' | uniq -c`.each_line do |line|
   lineno += 1
   break if lineno == ROWS
