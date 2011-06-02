@@ -1,23 +1,15 @@
 #!/bin/bash
 
 # TODO: Exclude own pid from the ps tree
+# TODO: Lock
 
 while :; do
   MON_HOME=~/020-ib-nfs-failure
-  MON_OTHER_HOSTS=`echo "biocluster owl parrot" | tr " " "\n" |
-    grep -v $HOSTNAME | tr "\n" " "`
 
   cd $MON_HOME/$HOSTNAME
 
-  ps -o uid,user,pid,pcpu,pmem,start_time,cmd --forest -e |
-  grep -v "^[ ]*1131 alevchuk" > /tmp/ps-$HOSTNAME;
+  ps -o uid,user,pid,pcpu,pmem,start_time,cmd --forest -e > /tmp/ps-$HOSTNAME;
   cp /tmp/ps-$HOSTNAME  ps-$HOSTNAME
-  cp /var/messages      messages-$HOSTNAME 2> /dev/null
-
-  for oh in $MON_OTHER_HOSTS; do
-    cp $MON_HOME/$oh/ps-$oh .
-    cp $MON_HOME/$oh/messages-$oh . 2> /dev/null
-  done
 
   rm -f .git/index.lock
   git add . ;
