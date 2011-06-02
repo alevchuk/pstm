@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # TODO: Exclude own pid from the ps tree
 
 while :; do
