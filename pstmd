@@ -1,6 +1,6 @@
-# mon TODO:
-#  - Excludes list for frequent/anoying but "trusted" processes
-alias mon='while :; do
+# TODO: Exclude own pid from the ps tree
+
+while :; do
   MON_HOME=~/020-ib-nfs-failure
   MON_OTHER_HOSTS=`echo "biocluster owl parrot" | tr " " "\n" |
     grep -v $HOSTNAME | tr "\n" " "`
@@ -26,4 +26,4 @@ alias mon='while :; do
 
   date ;
   sleep 1 ;
-done'
+done
