@@ -9,7 +9,10 @@ while :; do
   cd $MON_HOME/$HOSTNAME
 
   ps -o uid,user,pid,pcpu,pmem,start_time,cmd --forest -e > /tmp/ps-$HOSTNAME;
-  cp /tmp/ps-$HOSTNAME  ps-$HOSTNAME
+  cp /tmp/ps-$HOSTNAME  .
+
+  ss -ap > /tmp/pstm-ss-${HOSTNAME}
+  cp /tmp/pstm-ss-${HOSTNAME} .
 
   rm -f .git/index.lock
   git add . ;
