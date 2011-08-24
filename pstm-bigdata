@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+GITDIR = "/home_girkelab/alevchuk/020-ib-nfs-failure-bigdata/#{`hostname`.chomp}/.git"
+
+SCREENS = if ARGV.size > 0
+  ARGV[0].to_i
+else
+  1
+end
+
+
+COLS = `tput cols`.to_i
+ROWS = (`tput lines`.to_i - 1) * SCREENS
+
+
+cmd =
+  "git --git-dir=#{GITDIR} log -n #{ROWS * 60} | grep Date | awk '{print $5}'"
+
+ACTUAL = Hash.new(0)
+lineno = 0
+`#{cmd} | awk -F: '{print $1, $2}' | uniq -c`.each_line do |line|
+  lineno += 1
+  break if lineno == ROWS
+
+  c, h, m = line.split(' ')
+  ACTUAL["#{h}:#{m}"] = c.to_i
+end
+
+
+
+t_now = Time.now
+EXPECTED =
+  ((t_now - (ROWS - 1) * 60)..(t_now)).step(60).to_a.reverse.collect do |t|
+    "#{t.hour.to_s.rjust(2, '0')}:#{t.min.to_s.rjust(2, '0')}"
+  end
+
+EXPECTED.each {|t_str| puts t_str + " " + "*" * ACTUAL[t_str]}

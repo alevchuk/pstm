@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# TODO: Exclude own pid from the ps tree
+# TODO: Lock
+
+while :; do
+  MON_HOME=~/020-ib-nfs-failure-bigdata
+
+  cd $MON_HOME/$HOSTNAME
+
+  ps -o uid,user,pid,pcpu,pmem,start_time,cmd --forest -e > /tmp/ps-$HOSTNAME;
+  cp /tmp/ps-$HOSTNAME  .
+
+  ss -ap > /tmp/pstm-ss-${HOSTNAME}
+  cp /tmp/pstm-ss-${HOSTNAME} .
+
+  rm -f .git/index.lock
+  git add . ;
+  git commit -m "auto from $HOSTNAME" > /dev/null ;
+  #git gc --auto
+
+  ls ~alevchuk/bigdata/ > /dev/null ;
+
+  date ;
+  sleep 1 ;
+done
