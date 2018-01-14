@@ -1,0 +1,14 @@
+/dev/
+/lost+found/
+/media/
+/mnt/
+/opt/
+/proc/
+/run/
+/srv/
+/sys/
+/tmp/
+/var/log/
+/home/.ecryptfs/
+/home/im/
+/etc/cups/subscriptions.conf*
