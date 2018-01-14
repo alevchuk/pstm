@@ -9,6 +9,5 @@
 /sys/
 /tmp/
 /var/log/
-/home/.ecryptfs/
-/home/im/
+/home/
 /etc/cups/subscriptions.conf*
