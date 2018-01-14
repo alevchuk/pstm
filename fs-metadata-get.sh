@@ -1,4 +1,13 @@
 #!/bin/bash
+
+# Persist metadata changes of your file system, indended to use with source control of your /
+# Before using this do:
+# curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-gitignore > /.gitignore
+# cd /
+# git init
+# time git add .  # this may take a while
+# git commit -a -m 'first commit'
+
 set -u
 set -e
 
