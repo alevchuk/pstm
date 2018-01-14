@@ -9,5 +9,6 @@
 /sys/
 /tmp/
 /var/log/
+/var/lib/lxcfs/
 /home/
 /etc/cups/subscriptions.conf*
