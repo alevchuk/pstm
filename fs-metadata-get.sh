@@ -9,7 +9,6 @@
 # git commit -a -m 'first commit'
 
 set -u
-set -e
 
 cd /
 result_file=".fs-metadata"
