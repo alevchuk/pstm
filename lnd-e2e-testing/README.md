@@ -47,12 +47,15 @@ sudo aptitude
 ```
 
 3. Track changes to your filesystem:
- 
-  curl https://raw.githubusercontent.com/... > /.gitignore
-  curl https://raw.githubusercontent.com/... > /.fs-metadata-get.sh
-  chmod +x /.fs-metadata-get.sh
-  /.fs-metadata-get.sh && git add --all / && git commit -a -m 'LND Notes about SegWit addresses'
- 
+
+E.g. you can use [alevchuk/pstm/fs-time-machine method](alevchuk/pstm/fs-time-machine) of tracking fs changes:
+```
+curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-gitignore > /.gitignore
+curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-metadata-get.sh > /.fs-metadata-get.sh
+chmod +x /.fs-metadata-get.sh
+/.fs-metadata-get.sh && git add --all / && git commit -a -m 'LND Notes about SegWit addresses'
+```
+
 4. Make unix account for lightning
   adduser lightning
  
