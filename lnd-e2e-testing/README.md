@@ -758,7 +758,7 @@ lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inb
  
 7. Keep track of your balance:
  
-Use this script https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/get_balance_report.py
+Use this script pstm/lnd-e2e-testing/get_balance_report.py
 ```
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/get_balance_report.py
 chmod +x ~/get_balance_report.py
@@ -767,22 +767,24 @@ chmod +x ~/get_balance_report.py
 
 8. To get incomming channels you'll need allow incomming connections on port 9735
  
-    open port in iptabels rules (don't froget to persit in /etc/...)
+open port in iptabels rules (don't froget to persit in /etc/...)
+
       iptables -I INPUT -p tcp --dport 9735 -j ACCEPT
    
-    configures your home router to do port forwarding
+configures your home router to do port forwarding
    
-    start LND with your external IP specified:
+start LND with your external IP specified:
    
 ```
 lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 ```
 
-    test with netcat from a differet host
+test with netcat from a differet host
    
 ```
 echo hi | nc <external_ip_of_LND_host> 9735
 ```
 
-    lnc logs will show
+lnc logs will show
+
       2018-01-08 20:41:07.856 [ERR] CMGR: Can't accept connection: unexpected EOF
