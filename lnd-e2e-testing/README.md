@@ -33,13 +33,14 @@ Yet, for me the disk usage does not seem to be as big as the above claims
  
 1. One laptop setup firewall to _NO_ Incoming Connections _before_ connecting to the network
 
-    echo ":INPUT DROP
-    :FORWARD DROP
-    :OUTPUT ACCEPT
-    -A INPUT -i lo -j ACCEPT
-    -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-    -A OUTPUT -o lo -j ACCEPT" | iptables-restore
-
+```
+echo ":INPUT DROP
+:FORWARD DROP
+:OUTPUT ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT" | iptables-restore
+```
 
 Persist firewall across reboots:
 
@@ -91,17 +92,16 @@ Backup /.git to an external drive
  
 # Ergonomics
  
-Use your desktop account to sudo into root and lightning as needed.
- 
-Configure ~/.screenrc so it lables tabs, has good scrollback history, and always shows what host your on, e.g. AWS, Google Cloud, ...:
-```
-escape ^Bb
-defscrollback 60000
-maptimeout 0
-defhstatus 'amazon'
-hardstatus alwayslastline '%{= G}[ %{G} %h %{g} ][%= %{= w}%?%-Lw%?%{= B}%n*%f %t%?%{= B}(%u)%?%{= w}%+Lw%?%= %{= g}][%{B} %Y %{g}]'
-```
+Configure ~/.screenrc so it lables tabs, has good scrollback history, and always shows what host your on, e.g. AWS, Google Cloud, ...
 
+    escape ^Bb
+    defscrollback 60000
+    maptimeout 0
+    defhstatus 'amazon'
+    hardstatus alwayslastline '%{= G}[ %{G} %h %{g} ][%= %{= w}%?%-Lw%?%{= B}%n*%f %t%?%{= B}(%u)%?%{= w}%+Lw%?%= %{= g}][%{B} %Y %{g}]'
+
+Use your "desktop" account to sudo into root and lightning as needed
+ 
     screen
     
     sudo su  # screen tab for root
