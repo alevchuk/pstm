@@ -48,7 +48,7 @@ sudo aptitude
 
 3. Track changes to your filesystem:
 
-E.g. you can use [alevchuk/pstm/fs-time-machine method](alevchuk/pstm/fs-time-machine) of tracking fs changes:
+E.g. you can use [alevchuk/pstm/fs-time-machine method](../fs-time-machine) of tracking fs changes:
 ```
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-gitignore > /.gitignore
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-metadata-get.sh > /.fs-metadata-get.sh
