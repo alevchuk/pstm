@@ -58,8 +58,9 @@ chmod +x /.fs-metadata-get.sh
 ```
 
 4. Make unix account for lightning
-  adduser lightning
- 
+```
+adduser lightning
+``` 
  
 # Backups 
  
