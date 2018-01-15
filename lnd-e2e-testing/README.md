@@ -15,12 +15,14 @@ Yet, for me the disk usage does not seem to be as big as the above claims
  
 1. One laptop setup firewall to _NO_ Incoming Connections _before_ connecting to the network
  
-    echo ":INPUT DROP [10636:1306803]
-    :FORWARD DROP [0:0]
-    :OUTPUT ACCEPT [649976:161157043]
+ ```
+    echo ":INPUT DROP
+    :FORWARD DROP
+    :OUTPUT ACCEPT
     -A INPUT -i lo -j ACCEPT
     -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     -A OUTPUT -o lo -j ACCEPT" | iptables-restore
+```
 
 Persist firewall across reboots:
 
