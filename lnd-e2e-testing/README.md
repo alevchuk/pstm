@@ -27,7 +27,9 @@ Yet, for me the disk usage does not seem to be as big as the above claims
 Persist firewall across reboots:
 
     apt-get install iptables-persistent
-    copy rules to /etc/iptables/
+    iptables-save  # show current rules
+    # Copy rules to /etc/iptables/
+    # Reboot to test persistence
  
 2. Run system updates regularly
  
