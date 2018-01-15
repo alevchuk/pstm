@@ -758,7 +758,7 @@ lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inb
  
 7. Keep track of your balance:
  
-Use [get_balance_report.py script](pstm/lnd-e2e-testing/get_balance_report.py)
+Use [get_balance_report.py script](get_balance_report.py)
 ```
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/get_balance_report.py
 chmod +x ~/get_balance_report.py
