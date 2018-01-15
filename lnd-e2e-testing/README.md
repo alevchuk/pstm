@@ -739,8 +739,11 @@ lncli create
  
  ```
 lncli newaddress np2wkh  # Nested SegWit address
-https://testnet.coinfaucet.eu/en/  # get txn link and wait for 6 confirmations
+```
 
+https://testnet.coinfaucet.eu/en/  get txn link and wait for 6 confirmations
+
+```
 lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
 ```
  
