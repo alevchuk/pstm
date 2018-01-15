@@ -778,6 +778,8 @@ start LND with your external IP specified:
    
 ```
 lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+# On Debian, to get dig, you'll need to install the "dnsutils" package
 ```
 
 test with netcat from a differet host
