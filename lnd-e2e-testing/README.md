@@ -4,6 +4,8 @@ Table of contents
   * [System Requirements](#system-requirements)
   * [Security](#security)
   * [Backups](#backups)
+  * [Ergonomics](#ergonomics)
+  * [Build Go](#build-go)
   
   
 # System Requirements 
