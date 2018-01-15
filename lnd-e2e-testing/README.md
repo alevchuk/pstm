@@ -822,8 +822,10 @@ To get incoming channels you'll need allow incoming connections on port 9735:
  
 1. Open port in iptabels rules (don't froget to persit in /etc/...)
 
-      iptables -I INPUT -p tcp --dport 9735 -j ACCEPT
-   
+```
+iptables -I INPUT -p tcp --dport 9735 -j ACCEPT
+```
+
 2. Configure your home router to do port forwarding
    
 3. Start LND with your external IP specified:
