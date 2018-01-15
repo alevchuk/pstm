@@ -1,12 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import subprocess
 import json
 import sys
 
-date = subprocess.check_output(["date", "-Iminutes"]).strip()
-wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]))
-channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]))
+date = subprocess.check_output(["date", "-Iminutes"]).decode("utf-8").strip()
+wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]).decode("utf-8"))
+channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]).decode("utf-8"))
 
 wallet = int(wallet_balance["confirmed_balance"])
 wallet_unconfirmed = int(wallet_balance["unconfirmed_balance"])
