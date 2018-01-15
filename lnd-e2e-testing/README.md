@@ -5,10 +5,10 @@ Read https://bitcoin.org/en/full-node#minimum-requirements
 Yet, for me the disk usage does not seem to be as big as the above claims
 ```
 du -sch ~/*
-1.2M    /home/lightning/.btcd/logs
-16M /home/lightning/.lnd/logs
-137M    /home/lightning/.lnd/data
-15G /home/lightning/.btcd/data
+1.2M   /home/lightning/.btcd/logs
+16M    /home/lightning/.lnd/logs
+137M   /home/lightning/.lnd/data
+15G    /home/lightning/.btcd/data
 15G total
 ```
  
