@@ -794,7 +794,9 @@ Paste the address into https://testnet.coinfaucet.eu/en/, get txn link, wait for
 lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
 ```
  
-2. Enable autopilot by commenting out the last 3 properties in lnd.conf, then check activity in 1 hour:
+2. Enable autopilot by commenting out the last 3 properties in lnd.conf
+3. Restart LND
+4. Then check activity in 1 hour:
  
 ```
 lncli walletbalance
@@ -803,7 +805,7 @@ lncli listchannels  | grep active | sort | uniq -c  # number of open channels
 lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inbound peers
 ```
  
-3. Keep track of your balance:
+5. Keep track of your total balance:
  
 Use [get_balance_report.py script](get_balance_report.py)
 ```
@@ -811,6 +813,8 @@ curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_
 chmod +x ~/get_balance_report.py
 ~/get_balance_report.py
 ```
+
+As channels open and close you may see total balance go down but should it recover eventually.
 
 # Enable incomming channels
 
