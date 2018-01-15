@@ -505,13 +505,14 @@ NOTE: generate some random values for rpcuser= and rpcpass=
  
  
 2. Run:
- 
-    btcd
-    # It will take several days to replicate and verify the blockchain:
-    # Laptop (Taurinus, 3.9G RAM):        4 days
-    # Amazon AWS (t2.micro, 0.9G RAM):        4 days
-    # Google VM (Intel N1, 1 VCPU, 3.7G RAM):     1 day
- 
+
+```
+btcd
+# It will take several days to replicate and verify the blockchain:
+# Laptop (Taurinus, 3.9G RAM):        4 days
+# Amazon AWS (t2.micro, 0.9G RAM):        4 days
+# Google VM (Intel N1, 1 VCPU, 3.7G RAM):     1 day
+```
  
 # Start LND
  
@@ -724,57 +725,65 @@ cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash
 
 3. Run
  
-    lnd
+ ```
+ lnd
+ ```
  
 4. Create a wallet
  
-    lncli create
- 
+```
+lncli create
+```
+
 5. Get some free testing bitcoin
  
-    lncli newaddress np2wkh  # Nested SegWit address
-    https://testnet.coinfaucet.eu/en/  # get txn link and wait for 6 confirmations
+ ```
+lncli newaddress np2wkh  # Nested SegWit address
+https://testnet.coinfaucet.eu/en/  # get txn link and wait for 6 confirmations
 
-    lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
-
+lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
+```
  
 6. Enable autopilot by commenting out the last 3 properties in lnd.conf, then check activity in 1 hour:
  
-    lncli walletbalance
-    lncli channelbalance
-    lncli listchannels  | grep active | sort | uniq -c  # number of open channels
-    lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inbound peers
-
+```
+lncli walletbalance
+lncli channelbalance
+lncli listchannels  | grep active | sort | uniq -c  # number of open channels
+lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inbound peers
+```
  
 7. Keep track of your balance:
  
-      #!/usr/bin/python
-     
-      import subprocess
-      import json
-      import sys
-     
-      date = subprocess.check_output(["date", "-Iminutes"]).strip()
-      wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]))
-      channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]))
-     
-      wallet = int(wallet_balance["confirmed_balance"])
-      channel = int(channel_balance["balance"])
-     
-      print(
-        date + \
-        "\t" "{:,}".format(wallet) + \
-        "\t" + "{:,}".format(channel) + \
-        "\t" + "{:,}".format(wallet + channel))
-   
-       # chmod +x ~/mytoolz/get_balance_report.py
-       # ~/mytoolz/get_balance_report.py  >> ~/balance_history
-   
-       # Example balance history:
-       #                         Wallet          Channel         Total
-       # 2018-01-06T09:00-0800   156,768,612     50,318,616      207,087,228
-       # 2018-01-06T14:51-0800   67,110,697      156,719,673     223,830,370
- 
+```
+#!/usr/bin/python
+
+import subprocess
+import json
+import sys
+
+date = subprocess.check_output(["date", "-Iminutes"]).strip()
+wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]))
+channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]))
+
+wallet = int(wallet_balance["confirmed_balance"])
+channel = int(channel_balance["balance"])
+
+print(
+ date + \
+ "\t" "{:,}".format(wallet) + \
+ "\t" + "{:,}".format(channel) + \
+ "\t" + "{:,}".format(wallet + channel))
+
+# chmod +x ~/mytoolz/get_balance_report.py
+# ~/mytoolz/get_balance_report.py  >> ~/balance_history
+
+# Example balance history:
+#                         Wallet          Channel         Total
+# 2018-01-06T09:00-0800   156,768,612     50,318,616      207,087,228
+# 2018-01-06T14:51-0800   67,110,697      156,719,673     223,830,370
+```
+
 8. To get incomming channels you'll need allow incomming connections on port 9735
  
     open port in iptabels rules (don't froget to persit in /etc/...)
