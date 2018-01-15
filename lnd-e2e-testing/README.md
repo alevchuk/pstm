@@ -31,7 +31,7 @@ Yet, for me the disk usage does not seem to be as big as the above claims
  
 # Security 
  
-1. One laptop setup firewall to _NO_ Incoming Connections _before_ connecting to the network
+1. When setting up laptop, make firewall _Drop all_ Incoming Connections _before_ connecting to the network
 
 ```
 echo ":INPUT DROP
