@@ -155,7 +155,7 @@ go install; go test -v -p 1 $(go list ./... | grep -v  '/vendor/')
     go install . ./cmd/...
  
  
-# Start BTCD 
+# Configure BTCD 
  
 1. Place the following in ~/.lnd/lnd.conf
  
@@ -518,7 +518,9 @@ NOTE: generate some random values for rpcuser= and rpcpass=
     ; profile=6061
  
  
-2. Run:
+# Start BTCD 
+
+Run:
 
 ```
 btcd
@@ -529,7 +531,7 @@ btcd
 # Google VM (Intel N1, 1 VCPU, 3.7G RAM): 1 day
 ```
  
-# Start LND
+# Configure LND
  
     1. Place the following in ~/.lnd/lnd.conf
    
@@ -731,26 +733,29 @@ btcd
     ; establishment
     ; autopilot.allocation=0.6
  
-2. Bash completion for lncli
+# Start LND
+1. Bash completion for lncli
  
 ```
 cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash-completion /etc/bash_completion.d/lncli
 # in Debian install "bash-completion" and uncomment "enable bash completion" in /etc/bash.bashrc
 ```
 
-3. Run
+2. Run
  
  ```
  lnd
  ```
  
-4. Create a wallet
+3. Create a wallet
  
 ```
 lncli create
 ```
 
-5. Get some free testing bitcoin
+# Fund your LND wallet and enable AutoPilot
+
+1. Get some free testing bitcoin
  
  ```
 lncli newaddress np2wkh  # Nested SegWit address
@@ -762,7 +767,7 @@ Paste the address into https://testnet.coinfaucet.eu/en/, get txn link, wait for
 lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
 ```
  
-6. Enable autopilot by commenting out the last 3 properties in lnd.conf, then check activity in 1 hour:
+2. Enable autopilot by commenting out the last 3 properties in lnd.conf, then check activity in 1 hour:
  
 ```
 lncli walletbalance
@@ -771,7 +776,7 @@ lncli listchannels  | grep active | sort | uniq -c  # number of open channels
 lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inbound peers
 ```
  
-7. Keep track of your balance:
+3. Keep track of your balance:
  
 Use [get_balance_report.py script](get_balance_report.py)
 ```
@@ -780,15 +785,17 @@ chmod +x ~/get_balance_report.py
 ~/get_balance_report.py
 ```
 
-8. To get incoming channels you'll need allow incoming connections on port 9735
+# Enable incomming channels
+
+To get incoming channels you'll need allow incoming connections on port 9735:
  
-open port in iptabels rules (don't froget to persit in /etc/...)
+1. Open port in iptabels rules (don't froget to persit in /etc/...)
 
       iptables -I INPUT -p tcp --dport 9735 -j ACCEPT
    
-configures your home router to do port forwarding
+2. Configure your home router to do port forwarding
    
-start LND with your external IP specified:
+3. Start LND with your external IP specified:
    
 ```
 lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
@@ -796,7 +803,7 @@ lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 # On Debian, to get dig, you'll need to install the "dnsutils" package
 ```
 
-test with netcat from a different host
+4. Test with netcat from a different host
    
 ```
 echo hi | nc <external_ip_of_LND_host> 9735
