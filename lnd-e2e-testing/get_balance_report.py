@@ -19,15 +19,19 @@ print(
   "\t" + "{:,}".format(channel) + \
   "\t" + "{:,}".format(wallet + wallet_unconfirmed + channel))
 
+# Download script:
+# mkdir ~/lnd-e2e-testing
+# curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/lnd-e2e-testing/get_balance_report.py
+
 # Setup:
-# chmod +x ~/mytoolz/get_balance_report.py
+# chmod +x ~/lnd-e2e-testing/get_balance_report.py
 # echo -e "Time\tWallet\tUnconfirmed\tChannel\tTotal" >> ~/balance_history.tab
 
 # Update balance:
-# ~/mytoolz/get_balance_report.py  >> ~/balance_history.tab
+# ~/lnd-e2e-testing/get_balance_report.py  >> ~/balance_history.tab
 
 # Check balance:
-# (cat ~/balance_history.tab; ~/mytoolz/get_balance_report.py) | column -t
+# (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py) | column -t
 #
 # Example Output:
 #                        Wallet  Unconfirmed  Channel     Total
