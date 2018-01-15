@@ -27,7 +27,8 @@ print(
 # ~/mytoolz/get_balance_report.py  >> ~/balance_history.tab
 
 # Check balance:
-# (cat ~/balance_history; ~/mytoolz/get_balance_report.py) | column -t
+# (cat ~/balance_history.tab; ~/mytoolz/get_balance_report.py) | column -t
+#
 # Example Output:
 #                        Wallet  Unconfirmed  Channel     Total
 # 2018-01-14T16:14-0800  0       176,958,526  33,547,192  210,505,718
