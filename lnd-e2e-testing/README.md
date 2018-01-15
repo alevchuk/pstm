@@ -758,33 +758,11 @@ lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inb
  
 7. Keep track of your balance:
  
+Use this script https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/get_balance_report.py
 ```
-#!/usr/bin/python
-
-import subprocess
-import json
-import sys
-
-date = subprocess.check_output(["date", "-Iminutes"]).strip()
-wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]))
-channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]))
-
-wallet = int(wallet_balance["confirmed_balance"])
-channel = int(channel_balance["balance"])
-
-print(
- date + \
- "\t" "{:,}".format(wallet) + \
- "\t" + "{:,}".format(channel) + \
- "\t" + "{:,}".format(wallet + channel))
-
-# chmod +x ~/mytoolz/get_balance_report.py
-# ~/mytoolz/get_balance_report.py  >> ~/balance_history
-
-# Example balance history:
-#                         Wallet          Channel         Total
-# 2018-01-06T09:00-0800   156,768,612     50,318,616      207,087,228
-# 2018-01-06T14:51-0800   67,110,697      156,719,673     223,830,370
+curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/get_balance_report.py
+chmod +x ~/get_balance_report.py
+~/get_balance_report.py
 ```
 
 8. To get incomming channels you'll need allow incomming connections on port 9735
@@ -796,11 +774,15 @@ print(
    
     start LND with your external IP specified:
    
-      lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-   
+```
+lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+```
+
     test with netcat from a differet host
    
-      echo hi | nc <external_ip_of_LND_host> 9735
-   
+```
+echo hi | nc <external_ip_of_LND_host> 9735
+```
+
     lnc logs will show
       2018-01-08 20:41:07.856 [ERR] CMGR: Can't accept connection: unexpected EOF
