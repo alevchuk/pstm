@@ -12,6 +12,8 @@ Table of contents
   * [Start BTCD](#start-btcd)
   * [Configure LND](#configure-lnd)
   * [Start LND](#start-lnd)
+  * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
+  * [Enable incomming channels](#enable-incomming-channels)
   
 # System Requirements 
  
