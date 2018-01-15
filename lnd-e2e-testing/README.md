@@ -8,7 +8,10 @@ Table of contents
   * [Build Go](#build-go)
   * [Build LND](#build-lnd)
   * [Build BTCD](#build-btcd)
-  
+  * [Configure BTCD](#configure-btcd)
+  * [Start BTCD](#start-btcd)
+  * [Configure LND](#configure-lnd)
+  * [Start LND](#start-lnd)
   
 # System Requirements 
  
