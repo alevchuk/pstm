@@ -6,6 +6,8 @@ Table of contents
   * [Backups](#backups)
   * [Ergonomics](#ergonomics)
   * [Build Go](#build-go)
+  * [Build LND](#build-lnd)
+  * [Build BTCD](#build-btcd)
   
   
 # System Requirements 
