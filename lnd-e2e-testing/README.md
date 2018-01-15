@@ -508,10 +508,11 @@ NOTE: generate some random values for rpcuser= and rpcpass=
 
 ```
 btcd
+
 # It will take several days to replicate and verify the blockchain:
-# Laptop (Taurinus, 3.9G RAM):        4 days
+# Laptop (Taurinus, 3.9G RAM):            4 days
 # Amazon AWS (t2.micro, 0.9G RAM):        4 days
-# Google VM (Intel N1, 1 VCPU, 3.7G RAM):     1 day
+# Google VM (Intel N1, 1 VCPU, 3.7G RAM): 1 day
 ```
  
 # Start LND
