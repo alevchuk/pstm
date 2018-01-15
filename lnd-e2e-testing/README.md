@@ -3,27 +3,26 @@
 Read https://bitcoin.org/en/full-node#minimum-requirements
  
 Yet, for me the disk usage does not seem to be as big as the above claims
-```
-du -sch ~/*
-1.2M   /home/lightning/.btcd/logs
-16M    /home/lightning/.lnd/logs
-137M   /home/lightning/.lnd/data
-15G    /home/lightning/.btcd/data
-15G total
-```
+
+    du -sch ~/*
+    1.2M   /home/lightning/.btcd/logs
+    16M    /home/lightning/.lnd/logs
+    137M   /home/lightning/.lnd/data
+    15G    /home/lightning/.btcd/data
+    15G total
+
  
 # Security 
  
 1. One laptop setup firewall to _NO_ Incoming Connections _before_ connecting to the network
- 
- ```
+
     echo ":INPUT DROP
     :FORWARD DROP
     :OUTPUT ACCEPT
     -A INPUT -i lo -j ACCEPT
     -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     -A OUTPUT -o lo -j ACCEPT" | iptables-restore
-```
+
 
 Persist firewall across reboots:
 
@@ -34,7 +33,7 @@ Persist firewall across reboots:
  
 2. Run system updates regularly
  
- ```
+```
 apt-get install aptitude
 sudo aptitude
 # press "/" to search for packages
@@ -66,20 +65,20 @@ adduser lightning
  
 Backup /.git to an external drive
  
-  df -h
-  mkdir /mnt/orig/
-  mount /dev/sdb1 /mnt/orig/
-  rsync -a --delete /.git/ /mnt/orig/home/backup/.git/
-  umount /mnt/orig
+    df -h
+    mkdir /mnt/orig/
+    mount /dev/sdb1 /mnt/orig/
+    rsync -a --delete /.git/ /mnt/orig/home/backup/.git/
+    umount /mnt/orig
  
  
 # Ergonomics
  
 Use your desktop account to sudo into root and lightning as needed
  
-  screen
-  sudo su  # screen tab for root
-  sudo su -l lightning  # new tab
+    screen
+    sudo su  # screen tab for root
+    sudo su -l lightning  # new tab
  
  
 # Build Go
@@ -88,59 +87,65 @@ This is based on https://golang.org/doc/install/source
  
 1. Fetch bootstrap go
  
-  apt-get install golang-1.6
- 
+```
+apt-get install golang-1.6
+```
  
 2. Set bootstrap path. To ~/.bashrc add:
- 
-  export GOOS=linux
-  export GOARCH=amd64
-  export GOROOT_BOOTSTRAP=/usr/lib/go-1.6
- 
+
+```
+export GOOS=linux
+export GOARCH=amd64
+export GOROOT_BOOTSTRAP=/usr/lib/go-1.6
+```
  
 3. Fetch new go
- 
-  mkdir ~/src
-  cd ~/src
-  git clone https://go.googlesource.com/go
-  cd go
-  git fetch
-  git checkout go1.9.2
- 
+```
+mkdir ~/src
+cd ~/src
+git clone https://go.googlesource.com/go
+cd go
+git fetch
+git checkout go1.9.2
+```
+
 4. Build new go
- 
-   . ~/.bashrc
-   cd ~/src/go/src
-   ./make.bash
- 
+```
+. ~/.bashrc
+cd ~/src/go/src
+./make.bash
+```
  
 # Build LND
  
 This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
  
 1. Go Path, to ~/.bashrc add:
- 
-  export GOROOT=/home/lightning/src/go
-  export GOPATH=$GOROOT
-  export PATH=$GOPATH/bin:$PATH
- 
+```
+export GOROOT=/home/lightning/src/go
+export GOPATH=$GOROOT
+export PATH=$GOPATH/bin:$PATH
+```
+
 2. Install Glide
- 
-   . ~/.bashrc
-  old_gopath=$GOPATH && export GOPATH=~/gotmp1 && go get -u github.com/Masterminds/glide && mv ~/gotmp1/bin/glide $old_gopath/bin && echo Success! && rm -rf ~/gotmp1; export GOPATH=$old_gopath
- 
+```
+. ~/.bashrc
+
+old_gopath=$GOPATH && export GOPATH=~/gotmp1 && go get -u github.com/Masterminds/glide && mv ~/gotmp1/bin/glide $old_gopath/bin && echo Success! && rm -rf ~/gotmp1; export GOPATH=$old_gopath
+```
  
 3. Install LND and all dependencies (e.g. segwit capable btcd)
- 
-  git clone https://github.com/lightningnetwork/lnd $GOPATH/src/github.com/lightningnetwork/lnd
-  cd $GOPATH/src/github.com/lightningnetwork/lnd
-  glide install
-  go install . ./cmd/...
- 
+```
+git clone https://github.com/lightningnetwork/lnd $GOPATH/src/github.com/lightningnetwork/lnd
+cd $GOPATH/src/github.com/lightningnetwork/lnd
+glide install
+go install . ./cmd/...
+```
+
 4. Test
- 
-   go install; go test -v -p 1 $(go list ./... | grep -v  '/vendor/')
- 
+```
+go install; go test -v -p 1 $(go list ./... | grep -v  '/vendor/')
+```
  
 # Build BTCD
  
