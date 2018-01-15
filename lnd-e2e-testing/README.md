@@ -13,7 +13,7 @@ Table of contents
   * [Configure LND](#configure-lnd)
   * [Start LND](#start-lnd)
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
-  * [Enable incomming channels](#enable-incomming-channels)
+  * [Enable incoming channels](#enable-incoming-channels)
   
 # System Requirements 
  
@@ -816,7 +816,7 @@ chmod +x ~/get_balance_report.py
 
 As channels open and close you may see total balance go down but should it recover eventually.
 
-# Enable incomming channels
+# Enable incoming channels
 
 To get incoming channels you'll need allow incoming connections on port 9735:
  
