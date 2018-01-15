@@ -770,7 +770,7 @@ chmod +x ~/get_balance_report.py
 ~/get_balance_report.py
 ```
 
-8. To get incomming channels you'll need allow incomming connections on port 9735
+8. To get incoming channels you'll need allow incoming connections on port 9735
  
 open port in iptabels rules (don't froget to persit in /etc/...)
 
@@ -786,7 +786,7 @@ lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 # On Debian, to get dig, you'll need to install the "dnsutils" package
 ```
 
-test with netcat from a differet host
+test with netcat from a different host
    
 ```
 echo hi | nc <external_ip_of_LND_host> 9735
