@@ -91,9 +91,19 @@ Backup /.git to an external drive
  
 # Ergonomics
  
-Use your desktop account to sudo into root and lightning as needed
+Use your desktop account to sudo into root and lightning as needed.
  
+Configure ~/.screenrc so it lables tabs, has good scrollback history, and always shows what host your on, e.g. AWS, Google Cloud, ...:
+```
+escape ^Bb
+defscrollback 60000
+maptimeout 0
+defhstatus 'amazon'
+hardstatus alwayslastline '%{= G}[ %{G} %h %{g} ][%= %{= w}%?%-Lw%?%{= B}%n*%f %t%?%{= B}(%u)%?%{= w}%+Lw%?%= %{= g}][%{B} %Y %{g}]'
+```
+
     screen
+    
     sudo su  # screen tab for root
     sudo su -l lightning  # new tab
  
