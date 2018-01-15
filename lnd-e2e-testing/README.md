@@ -29,17 +29,18 @@ Persist firewall across reboots:
  
 2. Run system updates regularly
  
- 
-    apt-get install aptitude
-    sudo aptitude
-    # press "/" to search for packages
-    # press "+" to select a package for installing
-    # press "-" to de-select
-    # press Enter to read more able the package, "q" to go back
-    # press "u" to refresh cache
-    # press "U" to select all available upgrades
-    # press "g" to review changes before installing
-    # press "g" again to install/upgrade
+ ```
+apt-get install aptitude
+sudo aptitude
+# press "/" to search for packages
+# press "+" to select a package for installing
+# press "-" to de-select
+# press Enter to read more able the package, "q" to go back
+# press "u" to refresh cache
+# press "U" to select all available upgrades
+# press "g" to review changes before installing
+# press "g" again to install/upgrade
+```
 
 3. Track changes to your filesystem:
  
@@ -505,12 +506,16 @@ NOTE: generate some random values for rpcuser= and rpcpass=
  
 2. Run:
  
-  btcd
+    btcd
+    # It will take several days to replicate and verify the blockchain:
+    # Laptop (Taurinus, 3.9G RAM):        4 days
+    # Amazon AWS (t2.micro, 0.9G RAM):        4 days
+    # Google VM (Intel N1, 1 VCPU, 3.7G RAM):     1 day
  
  
 # Start LND
  
-1. Place the following in ~/.lnd/lnd.conf
+    1. Place the following in ~/.lnd/lnd.conf
    
     [Application Options]
    
@@ -710,28 +715,38 @@ NOTE: generate some random values for rpcuser= and rpcpass=
     ; establishment
     ; autopilot.allocation=0.6
  
-2. Run
+2. Bash completion for lncli
  
-  lnd
+```
+cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash-completion /etc/bash_completion.d/lncli
+# in Debian install "bash-completion" and uncomment "enable bash completion" in /etc/bash.bashrc
+```
+
+3. Run
  
-3. Bash completion for lncli
+    lnd
  
-  cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash-completion /etc/bash_completion.d/lncli
+4. Create a wallet
  
-4. Get some free testing bitcoin
+    lncli create
  
-  lncli newaddress np2wkh  # Nested SegWit address
-  https://testnet.coinfaucet.eu/en/
-  lncli walletbalance
+5. Get some free testing bitcoin
  
+    lncli newaddress np2wkh  # Nested SegWit address
+    https://testnet.coinfaucet.eu/en/  # get txn link and wait for 6 confirmations
+
+    lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
+
  
-5. Enable autopilot by commenting out the last 3 properties in lnd.conf
+6. Enable autopilot by commenting out the last 3 properties in lnd.conf, then check activity in 1 hour:
  
-  lncli walletbalance
-  lncli channelbalance
-  lncli listchannels
+    lncli walletbalance
+    lncli channelbalance
+    lncli listchannels  | grep active | sort | uniq -c  # number of open channels
+    lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inbound peers
+
  
-6. Keep track of your balance:
+7. Keep track of your balance:
  
       #!/usr/bin/python
      
@@ -752,16 +767,15 @@ NOTE: generate some random values for rpcuser= and rpcpass=
         "\t" + "{:,}".format(channel) + \
         "\t" + "{:,}".format(wallet + channel))
    
-      # chmod +x ~/mytoolz/get_balance_reprot.py
-      # echo -e "\t\t\tWallet\t\tChannel\t\tTotal" >> ~/balance_history
-      # ~/mytoolz/get_balance_reprot.py  >> ~/balance_history
+       # chmod +x ~/mytoolz/get_balance_report.py
+       # ~/mytoolz/get_balance_report.py  >> ~/balance_history
    
-      # Example balance history:
-      #                         Wallet          Channel         Total
-      # 2018-01-06T09:00-0800   156,768,612     50,318,616      207,087,228
-      # 2018-01-06T14:51-0800   67,110,697      156,719,673     223,830,370
+       # Example balance history:
+       #                         Wallet          Channel         Total
+       # 2018-01-06T09:00-0800   156,768,612     50,318,616      207,087,228
+       # 2018-01-06T14:51-0800   67,110,697      156,719,673     223,830,370
  
-7. To get incomming channels you'll need allow incomming connections on port 9735
+8. To get incomming channels you'll need allow incomming connections on port 9735
  
     open port in iptabels rules (don't froget to persit in /etc/...)
       iptables -I INPUT -p tcp --dport 9735 -j ACCEPT
@@ -776,6 +790,5 @@ NOTE: generate some random values for rpcuser= and rpcpass=
    
       echo hi | nc <external_ip_of_LND_host> 9735
    
-    lnc logs with show
+    lnc logs will show
       2018-01-08 20:41:07.856 [ERR] CMGR: Can't accept connection: unexpected EOF
-
