@@ -1,3 +1,9 @@
+Monitor number of Active Channels
+=================================
+```
+while :; do echo "$(date) $(lncli listchannels  | grep '"active": true,' | sort | uniq -c)"; sleep 60; done
+```
+
 Close All Channels
 ==================
 
