@@ -1,7 +1,8 @@
 Monitor number of Active Channels
 =================================
 ```
-while :; do echo "$(date) $(lncli listchannels  | grep '"active": true,' | sort | uniq -c)"; sleep 60; done
+while :; do 
+  echo "$(date) $(lncli listchannels  | grep '"active": true,' | sort | uniq -c)"; sleep 60; done
 ```
 
 Close All Channels
@@ -10,7 +11,7 @@ Close All Channels
 1. Restart LND with autopilot disabled.
 2. Run
 ```
-lncli listchannels | grep '"active": true' -A 2 | grep point |  awk -F'"' '{print $4}' | while read cp; do 
+lncli listchannels | grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | while read cp; do 
   funding_txn=$(echo $cp | awk -F: '{print $1}');
   output_index=$(echo $cp | awk -F: '{print $2}'); 
   lncli closechannel $funding_txn --output_index $output_index; done
