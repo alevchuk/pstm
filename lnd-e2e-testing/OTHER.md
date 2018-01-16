@@ -28,8 +28,8 @@ On testnet the graph is not well connected, so as you add more channels to get c
 lncli addinvoice --expiry $((3600 * 24)) 5867
 ```
 
-2. Side B: Re-try until successful:
+2. Side B: Re-try until successful (get <pay_req> from step 1):
 ```
-while :; do time lncli payinvoice lntb58670n1pd9ugappp5fxz5se266ljfu2ha8zpzfyr9evxuv2f67wyh8337slrhq99r4yzsdqqcqzysee68dhes2cp589cpxjrh8u2xkagw0cddz9drtza2q8duv4dsaa6q9c6adjknl4nyept03upd72lr985t2w2c7vk36l96jq7j97awk5cqlwpcza || break; sleep 60; done
+while :; do time lncli payinvoice <pay_req> || break; sleep 60; done
 ```
 
