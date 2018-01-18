@@ -8,6 +8,8 @@ while :; do
 Close All Channels
 ==================
 
+This may be needed during backward incombatible upgrades of LND. Then you need to close all the channels before upgrading.
+
 1. Restart LND with autopilot disabled.
 2. Run
 ```
