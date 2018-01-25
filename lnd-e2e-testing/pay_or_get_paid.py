@@ -31,7 +31,7 @@ def log(msg):
   timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
   with open(LOGFILE, 'a') as w:
     w.write("{} {}\n".format(timestamp, msg))
-    
+
 
 class MySocket:
     """demonstration class only
@@ -109,6 +109,8 @@ MICROPAYMENT = 5867
 x = 10
 total_sat_paied = 0
 sat_received = 0
+drop = False
+
 while True:
   if payee:
     invoice_list = []
@@ -119,7 +121,8 @@ while True:
       s.mysend(invoice['pay_req'])
 
     # Confirm that invoice was settled
-    for seconds_passed in range(600): # TOTO: actually count seconds, not polls
+    TOTAL_TIMEOUT = 600
+    for seconds_passed in range(TOTAL_TIMEOUT): # TOTO: actually count seconds, not polls
       num_settled = 0
       for invoice in invoice_list:
         invoice_status = \
@@ -128,19 +131,19 @@ while True:
           num_settled += 1
           sat_received += MICROPAYMENT
 
-      print("{} of {} settled after {} seconds".format(
-            num_settled, len(invoice_list), seconds_passed))
+      print("{} of {} settled after {} seconds (timeout triggering a switch will be at {} seconds)".format(
+            num_settled, len(invoice_list), seconds_passed, TOTAL_TIMEOUT))
       if num_settled == len(invoice_list):
         break
       time.sleep(1)
     else:
       print("Cannot settle after {}s, time to switch".format(seconds_passed))
       s.mysend("switch")
+
       log("Switch. Total sat_received was {} ({} payments)".format(
         sat_received,
         sat_received/MICROPAYMENT))
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
-
 
       payee = False
       total_sat_paied = 0
@@ -156,12 +159,15 @@ while True:
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
 
       payee = True
+      drop = False
       total_sat_paied = 0
       sat_received = 0
+    elif drop:
+        print("Dropping invoce {}".format(pay_req))
     else:
       for _ in range(10):
         try:
-          result = run('lncli payinvoice {}'.format(pay_req, timeout=60))
+          result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
           print(result)
         except Exception as e:
           print(e)
@@ -169,4 +175,5 @@ while True:
           total_sat_paied += MICROPAYMENT
           break
       else:
-        print("Could not pay invoice {}, dropping!".format(pay_req))
+        print("Could not pay invoice {}, dropping all further invoces until 'switch'!".format(pay_req))
+        drop = False
