@@ -18,7 +18,7 @@ chmod +x ./pay_or_get_paid.py
  ~/lnd-e2e-testing/pay_or_get_paid.py -l -p 5867
  
  # On B start the client
- ./pay_or_get_paid.py -s 35.203.148.62 -p 5867
+ ~/lnd-e2e-testing/pay_or_get_paid.py -s <IP of node A> -p 5867
 ```
 
 
