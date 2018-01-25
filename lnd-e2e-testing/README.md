@@ -19,7 +19,7 @@ Table of contents
  
 Read https://bitcoin.org/en/full-node#minimum-requirements
  
-Yet, for testnet the disk usage will be 10x smaller than the 145 GB recomendation:
+Yet, for testnet the disk usage will be 10x smaller than the 145 GB mainnet recomendation:
 
     du -sch ~/*
     1.2M   /home/lightning/.btcd/logs
