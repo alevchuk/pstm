@@ -9,7 +9,7 @@ Table of contents
   * [Build LND](#build-lnd)
   * [Build BTCD](#build-btcd)
   * [Configure BTCD](#configure-btcd)
-  * [Start BTCD](#start-btcd)
+  * [Start BTCD (this step takes 1 to 4 days)](#start-btcd)
   * [Configure LND](#configure-lnd)
   * [Start LND](#start-lnd)
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
