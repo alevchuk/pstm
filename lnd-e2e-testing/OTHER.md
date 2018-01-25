@@ -1,3 +1,28 @@
+Pay Between Node A and Node B back and forth
+=============================================
+
+For an end-to-end test you may want to use this ping-pong type of setup between node A and node B. Node A will issue micropayments to node B until it can't (ran out to funds or run out of channels). After 10 minutes of "can't" A and B switch roles. B starts paying A until it can't. And so on ...
+
+This can also help testnet generate some payment traffic so we can test multihop routing.
+
+```
+# Do this on both A and B
+mkdir ~/lnd-e2e-testing/
+cd ~/lnd-e2e-testing/
+curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ./get_balance_report.py
+curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/pay_or_get_paid.py > ./pay_or_get_paid.py
+chmod +x ./get_balance_report.py
+chmod +x ./pay_or_get_paid.py
+
+# On A start the server (port 5867 needs to be reachable by node B)
+ ~/lnd-e2e-testing/pay_or_get_paid.py -l -p 5867
+ 
+ # On B start the client
+ ./pay_or_get_paid.py -s 35.203.148.62 -p 5867
+```
+
+
+
 Monitor number of Active Channels
 =================================
 ```
