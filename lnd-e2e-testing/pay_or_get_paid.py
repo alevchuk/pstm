@@ -117,7 +117,7 @@ while True:
     for _ in range(x):
       invoice = run('lncli addinvoice {}'.format(MICROPAYMENT))
       invoice_list.append(invoice)
-      print(invoice)
+      print("Sending invoice: {}".format(invoice))
       s.mysend(invoice['pay_req'])
 
     # Confirm that invoice was settled
@@ -158,7 +158,7 @@ while True:
 
   else:
     pay_req = s.myreceive()
-    print(pay_req)
+    print("Got invoice: {}".format(pay_req))
     if pay_req == "switch":
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
       log("Switch. Total sat_paied was {:,} ({:,} payments)".format(
@@ -175,12 +175,14 @@ while True:
       for _ in range(10):
         try:
           result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
-          print(result)
         except Exception as e:
           print(e)
         else:
-          sat_paied += MICROPAYMENT
-          break
+          if result['payment_error'] == '':
+            sat_paied += MICROPAYMENT
+            break
+          else:
+            print("payinvoice FAILED: {}".format(result))
       else:
         print("Could not pay invoice {}, dropping all further invoces until 'switch'!".format(pay_req))
         drop = True
