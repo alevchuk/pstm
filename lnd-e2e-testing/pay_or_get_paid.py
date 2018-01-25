@@ -20,11 +20,11 @@ MSGLEN = 400
 LOGFILE = HOME + "/pay_or_get_paid.py.log"
 GET_BALANCE = HOME + '/lnd-e2e-testing/get_balance_report.py'
 
-def run(cmd):
+def run(cmd, timeout=600):
   return json.loads(
                subprocess.check_output(
                         cmd.split(' '),
-                        timeout=600).decode("utf-8"))
+                        timeout=timeout).decode("utf-8"))
 
 def log(msg):
   timestamp = datetime.datetime.now()
@@ -159,9 +159,9 @@ while True:
       total_sat_paied = 0
       sat_received = 0
     else:
-      for _ in range(5):
+      for _ in range(10):
         try:
-          result = run('lncli payinvoice {}'.format(pay_req))
+          result = run('lncli payinvoice {}'.format(pay_req, timeout=60))
           print(result)
         except Exception as e:
           print(e)
