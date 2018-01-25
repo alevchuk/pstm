@@ -12,26 +12,29 @@ wallet = int(wallet_balance["confirmed_balance"])
 wallet_unconfirmed = int(wallet_balance["unconfirmed_balance"])
 channel = int(channel_balance["balance"])
 
-print(
-  date + \
-  "\t" "{:,}".format(wallet) + \
-  "\t" "{:,}".format(wallet_unconfirmed) + \
-  "\t" + "{:,}".format(channel) + \
-  "\t" + "{:,}".format(wallet + wallet_unconfirmed + channel))
-
-# Download script:
-# mkdir ~/lnd-e2e-testing
-# curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/lnd-e2e-testing/get_balance_report.py
+if sys.argv[1] == '--json':
+    print(json.dumps({
+      'wallet': "{:,}".format(wallet),
+      'unconfirmed': "{:,}".format(wallet_unconfirmed),
+      'channel': "{:,}".format(channel),
+      'total': "{:,}".format(wallet + wallet_unconfirmed + channel)}, sort_keys=True))
+else:
+    print(
+      date + \
+      "\t" "{:,}".format(wallet) + \
+      "\t" "{:,}".format(wallet_unconfirmed) + \
+      "\t" + "{:,}".format(channel) + \
+      "\t" + "{:,}".format(wallet + wallet_unconfirmed + channel))
 
 # Setup:
-# chmod +x ~/lnd-e2e-testing/get_balance_report.py
+# chmod +x ~/mytoolz/get_balance_report.py
 # echo -e "Time\tWallet\tUnconfirmed\tChannel\tTotal" >> ~/balance_history.tab
 
 # Update balance:
-# ~/lnd-e2e-testing/get_balance_report.py  >> ~/balance_history.tab
+# ~/mytoolz/get_balance_report.py  >> ~/balance_history.tab
 
 # Check balance:
-# (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py) | column -t
+# (cat ~/balance_history.tab; ~/mytoolz/get_balance_report.py) | column -t
 #
 # Example Output:
 #                        Wallet  Unconfirmed  Channel     Total
