@@ -107,7 +107,7 @@ else:
 
 MICROPAYMENT = 5867
 x = 10
-total_sat_paied = 0
+sat_paied = 0
 sat_received = 0
 drop = False
 
@@ -129,38 +129,45 @@ while True:
           run('lncli lookupinvoice {}'.format(invoice['r_hash']))
         if invoice_status['settled']:
           num_settled += 1
-          sat_received += MICROPAYMENT
 
       print("{} of {} settled after {} seconds (timeout triggering a switch will be at {} seconds)".format(
             num_settled, len(invoice_list), seconds_passed, TOTAL_TIMEOUT))
       if num_settled == len(invoice_list):
+        sat_received += (MICROPAYMENT * num_settled)
         break
       time.sleep(1)
     else:
+      # not everything got payed, yet count any remaining invoices that were settled
+      for invoice in invoice_list:
+        invoice_status = \
+          run('lncli lookupinvoice {}'.format(invoice['r_hash']))
+        if invoice_status['settled']:
+          sat_received += MICROPAYMENT
+
       print("Cannot settle after {}s, time to switch".format(seconds_passed))
       s.mysend("switch")
 
-      log("Switch. Total sat_received was {} ({} payments)".format(
-        sat_received,
-        sat_received/MICROPAYMENT))
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
+      log("Switch. Total sat_received was {:,} ({:,} payments)".format(
+        sat_received,
+        sat_received / MICROPAYMENT))
 
       payee = False
-      total_sat_paied = 0
+      sat_paied = 0
       sat_received = 0
 
   else:
     pay_req = s.myreceive()
     print(pay_req)
     if pay_req == "switch":
-      log("Switch. Total sat_paied was {} ({} payments)".format(
-        total_sat_paied,
-        total_sat_paied / MICROPAYMENT))
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
+      log("Switch. Total sat_paied was {:,} ({:,} payments)".format(
+        sat_paied,
+        sat_paied / MICROPAYMENT))
 
       payee = True
       drop = False
-      total_sat_paied = 0
+      sat_paied = 0
       sat_received = 0
     elif drop:
         print("Dropping invoce {}".format(pay_req))
@@ -172,8 +179,8 @@ while True:
         except Exception as e:
           print(e)
         else:
-          total_sat_paied += MICROPAYMENT
+          sat_paied += MICROPAYMENT
           break
       else:
         print("Could not pay invoice {}, dropping all further invoces until 'switch'!".format(pay_req))
-        drop = False
+        drop = True
