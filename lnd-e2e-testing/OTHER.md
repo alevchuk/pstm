@@ -31,7 +31,7 @@ while :; do
 ```
 
 
-To relay payements: Close All Channels with no Remote Balance
+To relay payments: Close All Channels with no Remote Balance
 ==============================================================
 
 This can help if your trying to maximize your chances of being a relay. With no Remote Balance there is nothing to relay.
@@ -44,7 +44,7 @@ grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | sort -R | while re
   lncli closechannel $funding_txn --output_index $output_index; done
 ```
 
-Now monitor active channels (challens with remote balances show up on the bottom):
+Now monitor active channels (channels with remote balances show up on the bottom):
 ```
 while :; do date; \
   lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
@@ -54,10 +54,10 @@ while :; do date; \
 
 
 
-To do a backward incombatible ugrade of LND: Close All Channels
+To do a backward incompatible upgrade of LND: Close All Channels
 ================================================================
 
-This may be needed during backward incombatible upgrades of LND. Then you need to close all the channels before upgrading.
+This may be needed during backward incompatible upgrades of LND. Then you need to close all the channels before upgrading.
 
 1. Restart LND with autopilot disabled.
 2. Run
