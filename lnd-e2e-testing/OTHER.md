@@ -56,8 +56,9 @@ grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | sort -R | while re
   funding_txn=$(echo $cp | awk -F: '{print $1}');
   output_index=$(echo $cp | awk -F: '{print $2}');
   lncli closechannel $funding_txn --output_index $output_index; done
+```
 
-# Now monitor you active channels
+Now monitor active channels (challens with remote balances show up on the bottom):
 ```
 while :; do date; \
   lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
