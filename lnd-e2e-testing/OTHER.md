@@ -58,7 +58,11 @@ grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | sort -R | while re
   lncli closechannel $funding_txn --output_index $output_index; done
 
 # Now monitor you active channels
-while :; do lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2; echo; sleep 1; done
+```
+while :; do date; \
+  lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
+  n=$(echo "$lines" | wc -l );  \
+  echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; echo; sleep 600;  done
 ```
 
 
