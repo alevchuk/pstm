@@ -12,7 +12,7 @@ wallet = int(wallet_balance["confirmed_balance"])
 wallet_unconfirmed = int(wallet_balance["unconfirmed_balance"])
 channel = int(channel_balance["balance"])
 
-if sys.argv[1] == '--json':
+if len(sys.argv) > 1 and sys.argv[1] == '--json':
     print(json.dumps({
       'wallet': "{:,}".format(wallet),
       'unconfirmed': "{:,}".format(wallet_unconfirmed),
