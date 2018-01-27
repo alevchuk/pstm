@@ -30,23 +30,9 @@ while :; do
   echo "$(date) $(lncli listchannels  | grep '"active": true,' | sort | uniq -c)"; sleep 60; done
 ```
 
-Close All Channels
-==================
 
-This may be needed during backward incombatible upgrades of LND. Then you need to close all the channels before upgrading.
-
-1. Restart LND with autopilot disabled.
-2. Run
-```
-lncli listchannels | grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | while read cp; do 
-  funding_txn=$(echo $cp | awk -F: '{print $1}');
-  output_index=$(echo $cp | awk -F: '{print $2}'); 
-  lncli closechannel $funding_txn --output_index $output_index; done
-```
-3. For uncooperative close, add **-f** to  `lncli closechannel` 
-
-Close All Channels with no Remote Balance
-=========================================
+To relay payements: Close All Channels with no Remote Balance
+==============================================================
 
 This can help if your trying to maximize your chances of being a relay. With no Remote Balance there is nothing to relay.
 
@@ -66,6 +52,22 @@ while :; do date; \
   echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; echo; sleep 600;  done
 ```
 
+
+
+To do a backward incombatible ugrade of LND: Close All Channels
+================================================================
+
+This may be needed during backward incombatible upgrades of LND. Then you need to close all the channels before upgrading.
+
+1. Restart LND with autopilot disabled.
+2. Run
+```
+lncli listchannels | grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | while read cp; do 
+  funding_txn=$(echo $cp | awk -F: '{print $1}');
+  output_index=$(echo $cp | awk -F: '{print $2}'); 
+  lncli closechannel $funding_txn --output_index $output_index; done
+```
+3. For uncooperative close, add **-f** to  `lncli closechannel` 
 
 Pay Invoice Retry
 =================
