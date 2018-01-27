@@ -20,21 +20,27 @@ if len(sys.argv) > 1 and sys.argv[1] == '--json':
       'total': "{:,}".format(wallet + wallet_unconfirmed + channel)}, sort_keys=True))
 else:
     print(
+      "Time\t\t\t"
+      "Wallet\t\t"
+      "Unconfirmed\t"
+      "Channel\t\t"
+      "Total")
+    print(
       date + \
-      "\t" "{:,}".format(wallet) + \
-      "\t" "{:,}".format(wallet_unconfirmed) + \
-      "\t" + "{:,}".format(channel) + \
-      "\t" + "{:,}".format(wallet + wallet_unconfirmed + channel))
+      "\t{:,}".format(wallet) + \
+      "\t{:,}".format(wallet_unconfirmed) + \
+      "\t{:,}".format(channel) + \
+      "\t{:,}".format(wallet + wallet_unconfirmed + channel))
 
 # Setup:
-# chmod +x ~/mytoolz/get_balance_report.py
-# echo -e "Time\tWallet\tUnconfirmed\tChannel\tTotal" >> ~/balance_history.tab
+# chmod +x ~/lnd-e2e-testing/get_balance_report.py
+# ~/lnd-e2e-testing/get_balance_report.py > ~/balance_history.tab
 
 # Update balance:
-# ~/mytoolz/get_balance_report.py  >> ~/balance_history.tab
+# ~/lnd-e2e-testing/get_balance_report.py | grep -v Time  >> ~/balance_history.tab
 
 # Check balance:
-# (cat ~/balance_history.tab; ~/mytoolz/get_balance_report.py) | column -t
+# (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py | sort) | column -t
 #
 # Example Output:
 #                        Wallet  Unconfirmed  Channel     Total
