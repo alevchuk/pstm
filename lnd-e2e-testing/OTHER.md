@@ -34,9 +34,6 @@ while :; do
 To relay payments: Close All Channels with no Remote Balance
 ==============================================================
 
-To relay payments: Close All Channels with no Remote Balance
-==============================================================
-
 Monitor active channels (channels with remote balances show up on the bottom):
 ```
  while :; do date; \
@@ -44,7 +41,7 @@ Monitor active channels (channels with remote balances show up on the bottom):
  n=$(echo "$lines" | wc -l ); \
  echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; \
  lncli listchannels  | grep '"active": true,' | sort | uniq -c;  echo; sleep 600;  done
- ``
+ ```
  
 If there are no Remote Balances, that mean no one is opening channels to you (even if you openned channels to others). In this case the root cause for me was that I did not set my external IP correctly. An easy way to get it right is like this:
 ```
