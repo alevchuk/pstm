@@ -34,8 +34,26 @@ while :; do
 To relay payments: Close All Channels with no Remote Balance
 ==============================================================
 
-This can help if your trying to maximize your chances of being a relay. With no Remote Balance there is nothing to relay.
+To relay payments: Close All Channels with no Remote Balance
+==============================================================
 
+Monitor active channels (channels with remote balances show up on the bottom):
+```
+ while :; do date; \
+ lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
+ n=$(echo "$lines" | wc -l ); \
+ echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; \
+ lncli listchannels  | grep '"active": true,' | sort | uniq -c;  echo; sleep 600;  done
+ ``
+ 
+If there are no Remote Balances, that mean no one is opening channels to you (even if you openned channels to others). In this case the root cause for me was that I did not set my external IP correctly. An easy way to get it right is like this:
+```
+lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+```
+ 
+If external IP is set correctly, then the following can help maximize your chances of being a relay. With no Remote Balance there is nothing to relay.
+
+Close all channels without remote balances:
 ```
 lncli listchannels | grep '"remote_balance": "0"' -B 10  | \
 grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | sort -R | while read cp; do
@@ -43,15 +61,6 @@ grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | sort -R | while re
   output_index=$(echo $cp | awk -F: '{print $2}');
   lncli closechannel $funding_txn --output_index $output_index; done
 ```
-
-Now monitor active channels (channels with remote balances show up on the bottom):
-```
-while :; do date; \
-  lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
-  n=$(echo "$lines" | wc -l );  \
-  echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; echo; sleep 600;  done
-```
-
 
 
 To do a backward incompatible upgrade of LND: Close All Channels
