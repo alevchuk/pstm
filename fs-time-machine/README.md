@@ -26,7 +26,7 @@ git status  # make another commit if necessary
 git log --stat ~/.lnd
 ```
 
-# What changes in file Y?
+# What changed in file Y?
 ```
 git log -p ~lightning/.lnd/lnd.conf
 ```
