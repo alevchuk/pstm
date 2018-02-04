@@ -1,4 +1,4 @@
-On a small/dedicated system it's easy for Git to track every change to every file.
+On a small/dedicated system it's easy for Git to track changes to every file in the system.
 
 # One-time Setup
 ```
