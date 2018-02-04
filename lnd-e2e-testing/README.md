@@ -31,6 +31,8 @@ Yet, for testnet the disk usage will be 10x smaller than the 145 GB mainnet reco
  
 # Security 
  
+0. Use hardware that you control (e.g. laptop) and trust. E.g. I don't trust Intel's proprietery firmare because of the [known falws in their remote administration features](https://www.wired.com/story/intel-management-engine-vulnerabilities-pcs-servers-iot/). I good start would be Hardware that is certified by Free Software Foundation: https://www.fsf.org/resources/hw/endorsement/respects-your-freedom because the firware is open source and can be audited/corrected.
+
 1. When setting up laptop, make firewall _Drop all_ Incoming Connections _before_ connecting to the network
 
 ```
