@@ -1,5 +1,7 @@
 # One-time Setup
 ```
+# Requirement : become root, e.g. sudo su -l
+
 apt-get install git
 
 cd /
@@ -12,5 +14,14 @@ git init
 
 # Example of making a commit for the whole file system
 ```
+# Requirement : become root, e.g. sudo su -l
+
 /.fs-metadata-get.sh && git add --all / && git commit -a -m 'LND Notes about SegWit addresses'
+```
+
+
+# What changed in directory X?
+```
+git status  # make another commit if necessary
+git log -p --stat ~/.lnd
 ```
