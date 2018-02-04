@@ -94,7 +94,7 @@ Backup /.git to an external drive
  
 # Ergonomics
  
-Configure ~/.screenrc so it lables tabs, has good scrollback history, and always shows what host your on, e.g. AWS, Google Cloud, ...
+Configure ~/.screenrc so it lables tabs, has good scrollback history, and always shows what host your on, e.g. Laptop, AWS, Google Cloud, ... (I setup addtition nodes in the clouds for temorary experiments. Yet, the dedicated laptop node is the only one I'd trust)
 
     escape ^Bb
     defscrollback 60000
