@@ -19,10 +19,14 @@ git init
 /.fs-metadata-get.sh && git add --all / && git commit -a -m 'LND Notes about SegWit addresses'
 ```
 
+# What changed?
+```
+git status  # make another commit if necessary
+git log --stat /
+```
 
 # What changed in directory X?
 ```
-git status  # make another commit if necessary
 git log --stat ~lightning/.lnd
 ```
 
