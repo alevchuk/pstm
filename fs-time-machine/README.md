@@ -1,3 +1,5 @@
+On a small/dedicated system it's easy for Git to track every change to every file.
+
 # One-time Setup
 ```
 # Requirement : become root, e.g. sudo su -l
