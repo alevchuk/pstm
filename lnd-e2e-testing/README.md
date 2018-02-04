@@ -25,11 +25,11 @@ For testnet the disk usage will be 8x smaller than the 145 GB mainnet recomendat
 
     du -sch ~/*
     ...
-    1.2M   /home/lightning/.btcd/logs
-    16M    /home/lightning/.lnd/logs
+    1.2M  /home/lightning/.btcd/logs
+    16M   /home/lightning/.lnd/logs
     ...
     2.G   /home/lightning/.lnd/data
-    15G    /home/lightning/.btcd/data
+    15G   /home/lightning/.btcd/data
     
     18G total
 
