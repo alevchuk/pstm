@@ -23,7 +23,7 @@ git init
 # What changed in directory X?
 ```
 git status  # make another commit if necessary
-git log --stat ~/.lnd
+git log --stat ~lightning/.lnd
 ```
 
 # What changed in file Y?
