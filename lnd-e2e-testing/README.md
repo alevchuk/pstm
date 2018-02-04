@@ -17,7 +17,9 @@ Table of contents
   
 # System Requirements 
  
-Read https://bitcoin.org/en/full-node#minimum-requirements
+Read https://bitcoin.org/en/full-node#minimum-requirements for Bitcoin blockchain requiurements.
+
+You need 4 GB of RAM because LND can get memory hungry at times. Yet currently my LND process runs with 1.3 GB virutual memory (of which 600 MB is in RSS).
  
 Yet, for testnet the disk usage will be 10x smaller than the 145 GB mainnet recomendation:
 
