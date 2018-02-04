@@ -21,14 +21,17 @@ Read https://bitcoin.org/en/full-node#minimum-requirements for Bitcoin blockchai
 
 You need 4 GB of RAM because LND can get memory hungry at times. Yet currently my LND process runs with 1.3 GB virutual memory (of which 600 MB is in RSS).
  
-For testnet the disk usage will be 10x smaller than the 145 GB mainnet recomendation:
+For testnet the disk usage will be 8x smaller than the 145 GB mainnet recomendation:
 
     du -sch ~/*
+    ...
     1.2M   /home/lightning/.btcd/logs
     16M    /home/lightning/.lnd/logs
-    137M   /home/lightning/.lnd/data
+    ...
+    2.G   /home/lightning/.lnd/data
     15G    /home/lightning/.btcd/data
-    15G total
+    
+    18G total
 
  
 # Security 
