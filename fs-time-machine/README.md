@@ -23,5 +23,15 @@ git init
 # What changed in directory X?
 ```
 git status  # make another commit if necessary
-git log -p --stat ~/.lnd
+git log --stat ~/.lnd
+```
+
+# What changes in file Y?
+```
+git log -p ~lightning/.lnd/lnd.conf
+```
+
+# What file permissions changed?
+```
+git log -p /.fs-metadata.acl-only
 ```
