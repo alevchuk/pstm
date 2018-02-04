@@ -75,9 +75,12 @@ sudo aptitude
 
 E.g. you can use [alevchuk/pstm/fs-time-machine method](../fs-time-machine) of tracking fs changes:
 ```
+cd /
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-gitignore > /.gitignore
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-metadata-get.sh > /.fs-metadata-get.sh
 chmod +x /.fs-metadata-get.sh
+git init
+
 /.fs-metadata-get.sh && git add --all / && git commit -a -m 'LND Notes about SegWit addresses'
 ```
 
