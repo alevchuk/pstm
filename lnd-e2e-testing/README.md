@@ -36,7 +36,7 @@ For testnet the disk usage will be 8x smaller than the 145 GB mainnet recommenda
  
 # Security 
  
-0. Use hardware that you control (e.g. laptop) and trust. E.g. I don't trust Intel's proprietary firmare because of the [known flaws in their remote administration features](https://www.wired.com/story/intel-management-engine-vulnerabilities-pcs-servers-iot/). I good start would be Hardware that is certified by Free Software Foundation: https://www.fsf.org/resources/hw/endorsement/respects-your-freedom because the firmware is open source and can be audited.
+0. Use hardware that you control (e.g. laptop) and trust. E.g. I don't trust Intel's proprietary firmare because of the [known flaws in their remote administration features](https://www.wired.com/story/intel-management-engine-vulnerabilities-pcs-servers-iot/). A good start would be hardware that is certified by Free Software Foundation: https://www.fsf.org/resources/hw/endorsement/respects-your-freedom because the firmware is open source and can be audited.
 
 1. When setting up your laptop, make firewall _Drop all_ Incoming Connections _before_ connecting to the network. Later you may need to open 1 port for Lightning (see [Enable incoming channels](#enable-incoming-channels))
 
