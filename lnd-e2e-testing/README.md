@@ -71,7 +71,7 @@ sudo aptitude
 # press "g" again to install/upgrade
 ```
 
-3. Track changes to your filesystem:
+3. Track changes to your filesystem. This can come in handy when you get paranoid (e.g. what changed after laptop update or reboot?)
 
 E.g. you can use [alevchuk/pstm/fs-time-machine method](../fs-time-machine) of tracking fs changes:
 ```
