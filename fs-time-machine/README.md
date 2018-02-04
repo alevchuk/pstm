@@ -1,9 +1,12 @@
 # One-time Setup
 ```
+apt-get install git
+
 cd /
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-gitignore > /.gitignore
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-metadata-get.sh > /.fs-metadata-get.sh
 chmod +x /.fs-metadata-get.sh
+
 git init
 ```
 
