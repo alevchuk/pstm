@@ -36,7 +36,7 @@ To relay payments: Close All Channels with no Remote Balance
 
 Monitor active channels (channels with remote balances show up on the bottom):
 ```
- while :; do date; \
+while :; do date; \
  lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
  n=$(echo "$lines" | wc -l ); \
  echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; \
