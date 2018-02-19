@@ -59,6 +59,8 @@ Close all channels without remote balances:
     lncli listchannels | grep '"remote_balance": "0"' -B 10   | awk -F'"' '/point/ {print $4}' | sort -R | while read cp; do           funding_txn=$(echo $cp | awk -F: '{print $1}');           output_index=$(echo $cp | awk -F: '{print $2}');           lncli closechannel   $funding_txn --output_index $output_index  --force ;         done
 ```
 
+Wait 48 hours. Autopilot will establish new channels. Your peers may choose to commit balances to those channels which you'll see as `remote_balance`.
+
 
 To do a backward incompatible upgrade of LND: Close All Channels
 ================================================================
