@@ -20,11 +20,23 @@ MSGLEN = 400
 LOGFILE = HOME + "/pay_or_get_paid.py.log"
 GET_BALANCE = HOME + '/lnd-e2e-testing/get_balance_report.py'
 
-def run(cmd, timeout=600):
-  return json.loads(
-               subprocess.check_output(
-                        cmd.split(' '),
-                        timeout=timeout).decode("utf-8"))
+RUN_TRY_NUM = 6
+RUN_TRY_SLEEP = 10
+
+def run(cmd, timeout=120):
+  for _ in range(RUN_TRY_NUM):
+    try:
+      raw = subprocess.check_output(
+               cmd.split(' '),
+               timeout=timeout
+            ).decode("utf-8")
+      break
+    except Exception as e:
+        print(e)
+  else:
+    print("Failed command: {}".format(cmd))
+
+  return json.loads(raw)
 
 def log(msg):
   timestamp = datetime.datetime.now()
@@ -172,17 +184,15 @@ while True:
     elif drop:
         print("Dropping invoce {}".format(pay_req))
     else:
-      for _ in range(10):
-        try:
-          result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
-        except Exception as e:
-          print(e)
-        else:
-          if result['payment_error'] == '':
-            sat_paied += MICROPAYMENT
-            break
-          else:
-            print("payinvoice FAILED: {}".format(result))
-      else:
-        print("Could not pay invoice {}, dropping all further invoces until 'switch'!".format(pay_req))
+      try:
+        result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
+      except Exception as e:
+        print(e)
+        print("payinvoice FAILED: {}, dropping all further invoces until 'switch'!".format(result))
         drop = True
+      else:
+        if result['payment_error'] == '':
+          sat_paied += MICROPAYMENT
+        else:
+          print("Could not pay invoice {}, dropping all further invoces until 'switch'!".format(pay_req))
+          drop = True
