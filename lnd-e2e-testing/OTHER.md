@@ -23,26 +23,18 @@ chmod +x ./pay_or_get_paid.py
 
 
 
-Monitor number of Active Channels
-=================================
+Monitor Remote Balance in open Channels
+=======================================
 ```
-while :; do 
-  echo "$(date) $(lncli listchannels  | grep '"active": true,' | sort | uniq -c)"; sleep 60; done
+while :; do date;  lines="$(lncli listchannels  | grep remote_balance | tr -d '"' | sort -n -k2)";  echo "$lines" > /tmp/remote_balance_new; diff /tmp/remote_balance_old /tmp/remote_balance_new; cp /tmp/remote_balance_new /tmp/remote_balance_old; echo "$lines" | awk '{ print NR ":" $0 }' | column -t;  lncli listchannels  | grep '"active":' | sort | uniq -c;  echo; sleep 600;  done
 ```
 
 
-To relay payments: Close All Channels with no Remote Balance
-==============================================================
+Close All Channels with no Remote Balance
+=========================================
 
-Monitor channels:
-```
-while :; do date; \
- lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
- n=$(echo "$lines" | wc -l ); \
- echo "$lines" | awk '{ print '$n' - NR + 1 ":" $0 }' | column -t; \
- lncli listchannels  | grep '"active": true,' | sort | uniq -c;  echo; sleep 600;  done
- ```
- 
+First, see the above section: ***Monitor Remote Balance in open Channels***
+
 If there are no Remote Balances, that mean no one is opening channels to you (even if you openned channels to others). In this case the root cause for me was that I did not set my external IP correctly. An easy way to get it right is like this:
 ```
 lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
