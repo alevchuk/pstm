@@ -194,5 +194,5 @@ while True:
         if result['payment_error'] == '':
           sat_paied += MICROPAYMENT
         else:
-          print("Could not pay invoice {}, dropping all further invoces until 'switch'!".format(pay_req))
+          print("Could not pay invoice {} because {}, dropping all further invoces until 'switch'!".format(pay_req, result['payment_error']))
           drop = True
