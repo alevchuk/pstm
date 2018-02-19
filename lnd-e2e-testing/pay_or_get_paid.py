@@ -35,6 +35,8 @@ def run(cmd, timeout=120):
       break
     except Exception as e:
         print(e)
+        print("Sleeping for {} seconds".format(RUN_TRY_SLEEP))
+        time.sleep(RUN_TRY_SLEEP)
 
     try_duration = time.time() - try_start
     accumulated_timeout += try_duration
