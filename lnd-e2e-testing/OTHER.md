@@ -35,7 +35,7 @@ Close All Channels with no Remote Balance
 
 First, see the above section: ***Monitor Remote Balance in open Channels***
 
-If there are no Remote Balances, that means no has funds in channels open in your direction (even if you have funds in openned channels to others). In this case the root cause for me was that I did not set my external IP correctly. An easy way to get it right is like this:
+If there are no Remote Balances, that means no one has funds in channels open in your direction (even if you have funds in openned channels to others). In this case the root cause for me was that I did not set my external IP correctly. An easy way to get it right is like this:
 ```
 lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 ```
