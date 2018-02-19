@@ -33,6 +33,8 @@ while :; do date;  lines="$(lncli listchannels  | grep remote_balance | tr -d '"
 Close All Channels with no Remote Balance
 =========================================
 
+You may need to use this trick to be able to relay payments.
+
 First, see the above section: ***Monitor Remote Balance in open Channels***
 
 If there are no Remote Balances, that means no one has funds in channels open in your direction (even if you have funds in openned channels to others). In this case the root cause for me was that I did not set my external IP correctly. An easy way to get it right is like this:
