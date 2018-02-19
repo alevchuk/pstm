@@ -20,11 +20,13 @@ MSGLEN = 400
 LOGFILE = HOME + "/pay_or_get_paid.py.log"
 GET_BALANCE = HOME + '/lnd-e2e-testing/get_balance_report.py'
 
-RUN_TRY_NUM = 6
+RUN_TRY_NUM = 12
 RUN_TRY_SLEEP = 10
 
 def run(cmd, timeout=120):
+  accumulated_timeout = 0
   for _ in range(RUN_TRY_NUM):
+    try_start = time.time()
     try:
       raw = subprocess.check_output(
                cmd.split(' '),
@@ -33,8 +35,15 @@ def run(cmd, timeout=120):
       break
     except Exception as e:
         print(e)
+
+    try_duration = time.time() - try_start
+    accumulated_timeout += try_duration
+
+    if accumulated_timeout > timeout:
+        raise Exception("Run command {} timeout after {} seconds".format(cmd, accumulated_timeout))
+
   else:
-    print("Failed command: {}".format(cmd))
+    raise Exception("Failed command: {}".format(cmd))
 
   return json.loads(raw)
 
@@ -48,7 +57,8 @@ def log(msg):
 
 
 class MySocket:
-    """demonstration class only
+    """
+      MySocket implementation from https://docs.python.org/2/howto/sockets.html#using-a-socket
       - coded for clarity, not efficiency
     """
 
@@ -120,7 +130,7 @@ else:
 
 
 MICROPAYMENT = 5867
-x = 10
+NUM_PAYMENTS_PER_BATCH = 20
 sat_paied = 0
 sat_received = 0
 drop = False
@@ -129,7 +139,7 @@ retry = False
 while True:
   if payee:
     invoice_list = []
-    for _ in range(x):
+    for _ in range(NUM_PAYMENTS_PER_BATCH):
       invoice = run('lncli addinvoice {}'.format(MICROPAYMENT))
       invoice_list.append(invoice)
       print("Sending invoice: {}".format(invoice))
@@ -137,7 +147,9 @@ while True:
 
     # Confirm that invoice was settled
     TOTAL_TIMEOUT = 600
-    for seconds_passed in range(TOTAL_TIMEOUT): # TOTO: actually count seconds, not polls
+    start_time = time.time()
+    all_settled = False
+    for _ in range(TOTAL_TIMEOUT):
       num_settled = 0
       for invoice in invoice_list:
         invoice_status = \
@@ -145,13 +157,21 @@ while True:
         if invoice_status['settled']:
           num_settled += 1
 
+      seconds_passed = time.time() - start_time
+      if seconds_passed > TOTAL_TIMEOUT:
+        log("Invoice check timeout after {} seconds".format(seconds_passed))
+        break
+
       print("{} of {} settled after {} seconds (timeout triggering a switch will be at {} seconds)".format(
             num_settled, len(invoice_list), seconds_passed, TOTAL_TIMEOUT))
       if num_settled == len(invoice_list):
         sat_received += (MICROPAYMENT * num_settled)
+        all_settled = True
         break
+
       time.sleep(1)
-    else:
+
+    if not all_settled:
       # not everything got payed, yet count any remaining invoices that were settled
       for invoice in invoice_list:
         invoice_status = \
@@ -172,12 +192,12 @@ while True:
       sat_received = 0
 
   else:
-    
+
     if not retry:
         pay_req = s.myreceive()
         print("Got invoice: {}".format(pay_req))
     retry = False
-    
+
     if pay_req == "switch":
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
       log("Switch. Total sat_paied was {:,} ({:,} payments)".format(
@@ -191,7 +211,7 @@ while True:
     elif drop:
         print("Dropping invoce {}".format(pay_req))
     else:
-      
+
       try:
         result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
       except Exception as e:
