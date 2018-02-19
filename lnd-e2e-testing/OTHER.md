@@ -26,7 +26,7 @@ chmod +x ./pay_or_get_paid.py
 Monitor Remote Balance in open Channels
 =======================================
 ```
-while :; do date;  lines="$(lncli listchannels  | grep remote_balance | tr -d '"' | sort -n -k2)";  echo "$lines" > /tmp/remote_balance_new; diff /tmp/remote_balance_old /tmp/remote_balance_new; cp /tmp/remote_balance_new /tmp/remote_balance_old; echo "$lines" | awk '{ print NR ":" $0 }' | column -t;  lncli listchannels  | grep '"active":' | sort | uniq -c;  echo; sleep 600;  done
+while :; do date;  lines="$(lncli listchannels  | grep remote_balance | tr -d '"' | sort -n -k2)";  n=$(echo "$lines" | wc -l ); echo "$lines" > /tmp/remote_balance_new; diff /tmp/remote_balance_old /tmp/remote_balance_new; cp /tmp/remote_balance_new /tmp/remote_balance_old; echo "$lines" | awk '{ print NR ": " '$n' - NR + 1  ": " $0 }' | column -t;  lncli listchannels  | grep '"active":' | sort | uniq -c;  echo; sleep 600;  done
 ```
 
 
