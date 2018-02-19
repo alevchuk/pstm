@@ -34,7 +34,7 @@ while :; do
 To relay payments: Close All Channels with no Remote Balance
 ==============================================================
 
-Monitor active channels (channels with remote balances show up on the bottom):
+Monitor channels:
 ```
 while :; do date; \
  lines="$(lncli listchannels | grep '"active": true' -A 10 | grep remote_balance | tr -d '"' | sort -n -k2)"; \
@@ -52,11 +52,11 @@ If external IP is set correctly, then the following can help maximize your chanc
 
 Close all channels without remote balances:
 ```
-lncli listchannels | grep '"remote_balance": "0"' -B 10  | \
-grep '"active": true' -A 2 | awk -F'"' '/point/ {print $4}' | sort -R | while read cp; do
-  funding_txn=$(echo $cp | awk -F: '{print $1}');
-  output_index=$(echo $cp | awk -F: '{print $2}');
-  lncli closechannel $funding_txn --output_index $output_index; done
+    # try nicely, bilateral close
+    lncli listchannels | grep '"remote_balance": "0"' -B 10   | awk -F'"' '/point/ {print $4}' | sort -R | while read cp; do           funding_txn=$(echo $cp | awk -F: '{print $1}');           output_index=$(echo $cp | awk -F: '{print $2}');           lncli closechannel   $funding_txn --output_index $output_index          ;         done
+
+    # force all the ones that did not close bilaterally
+    lncli listchannels | grep '"remote_balance": "0"' -B 10   | awk -F'"' '/point/ {print $4}' | sort -R | while read cp; do           funding_txn=$(echo $cp | awk -F: '{print $1}');           output_index=$(echo $cp | awk -F: '{print $2}');           lncli closechannel   $funding_txn --output_index $output_index  --force ;         done
 ```
 
 
