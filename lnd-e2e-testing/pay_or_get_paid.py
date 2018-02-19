@@ -42,7 +42,9 @@ def log(msg):
   timestamp = datetime.datetime.now()
   timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
   with open(LOGFILE, 'a') as w:
-    w.write("{} {}\n".format(timestamp, msg))
+    msg = "{} {}\n".format(timestamp, msg)
+    print(msg)
+    w.write(msg)
 
 
 class MySocket:
@@ -122,6 +124,7 @@ x = 10
 sat_paied = 0
 sat_received = 0
 drop = False
+retry = False
 
 while True:
   if payee:
@@ -169,8 +172,12 @@ while True:
       sat_received = 0
 
   else:
-    pay_req = s.myreceive()
-    print("Got invoice: {}".format(pay_req))
+    
+    if not retry:
+        pay_req = s.myreceive()
+        print("Got invoice: {}".format(pay_req))
+    retry = False
+    
     if pay_req == "switch":
       log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
       log("Switch. Total sat_paied was {:,} ({:,} payments)".format(
@@ -184,6 +191,7 @@ while True:
     elif drop:
         print("Dropping invoce {}".format(pay_req))
     else:
+      
       try:
         result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
       except Exception as e:
@@ -194,5 +202,13 @@ while True:
         if result['payment_error'] == '':
           sat_paied += MICROPAYMENT
         else:
-          print("Could not pay invoice {} because {}, dropping all further invoces until 'switch'!".format(pay_req, result['payment_error']))
-          drop = True
+          # most likely BTCD is behind, try again in a little bit
+          if result['payment_error'].startswith('FinalIncorrectCltvExpiry'):
+            retry = True
+          else:
+            log("Could not pay invoice {} because {}, "
+                  "dropping all further invoces until 'switch'!".format(
+                      pay_req, result['payment_error']
+                  )
+              )
+            drop = True
