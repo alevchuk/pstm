@@ -1,4 +1,4 @@
-Pay Between Node A and Node B back and forth
+Pay back and forth between Node A and Node B 
 =============================================
 
 For an end-to-end test you may want to use this ping-pong type of setup between node A and node B. Node A will issue micropayments to node B until it can't (ran out to funds or run out of channels). After 10 minutes of "can't" A and B switch roles. B starts paying A until it can't. And so on ...
