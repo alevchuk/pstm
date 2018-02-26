@@ -593,7 +593,7 @@ btcd
    ```
  
 # Start LND
-1. Bash completion for lncli
+1. Bash completion for lncli, which was contributed to LND by [Andreas M. Antonopoulos](https://github.com/lightningnetwork/lnd/commits/master/contrib/lncli.bash-completion)
  
 ```
 cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash-completion /etc/bash_completion.d/lncli
