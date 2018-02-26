@@ -570,205 +570,27 @@ btcd
  
 # Configure LND
  
-    1. Place the following in ~/.lnd/lnd.conf
+   1. Copy sample config from LND github:
+   ```
+   curl https://raw.githubusercontent.com/lightningnetwork/lnd/master/sample-lnd.conf > ~/.lnd/sample-lnd.conf 
+   ```
+    
+   2. Find and change the following config options in ~/.lnd/sample-lnd.conf 
+   ```
+   debuglevel=ATPL=debug,CRTR=warn
+   bitcoin.simnet=0
+   bitcoin.testnet=1
+    
+   autopilot.active=1
+   autopilot.maxchannels=20
+   autopilot.allocation=1.0
+   ```
    
-    [Application Options]
-   
-    ; The directory that lnd stores all wallet, chain, and channel related data
-    ; within The default is ~/.lnd/data on POSIX OSes, $LOCALAPPDATA/Lnd/data on
-    ; Windows, ~/Library/Application Support/Lnd/data on Mac OS, and $home/lnd/data
-    ; on Plan9.  Environment variables are expanded so they may be used.  NOTE:
-    ; Windows environment variables are typically %VARIABLE%, but they must be
-    ; accessed with $VARIABLE here.  Also, ~ is expanded to $LOCALAPPDATA on Windows.
-    ; datadir=~/.lnd/data
-   
-    ; The directory that logs are stored in. The logs are auto-rotated by default.
-    ; Rotated logs are compressed in place.
-    ; logdir=~/.lnd/logs
-   
-    ; Path to TLS certificate for lnd's RPC and REST services.
-    ; tlscertpath=~/.lnd/tls.cert
-   
-    ; Path to TLS private key for lnd's RPC and REST services.
-    ; tlskeypath=~/.lnd/tls.key
-   
-    ; Disable macaroon authentication. Macaroons are used are bearer credentials to
-    ; authenticate all RPC access. If one wishes to opt out of macaroons, uncomment
-    ; the line below.
-    ; no-macaroons=true
-   
-    ; Path to write the admin macaroon for lnd's RPC and REST services if it
-    ; doesn't exist. This can be set if one wishes to store the admin macaroon in a
-    ; distinct location. By default, it is stored within lnd's main home directory.
-    ; Applications that are able to read this file, gains admin macaroon access
-    ; adminmacaroonpath=~/.lnd/admin.macaroon
-   
-    ; Path to write the read-only macaroon for lnd's RPC and REST services if it
-    ; doesn't exist. This can be set if one wishes to store the read-only macaroon
-    ; in a distinct location. The read only macaroon allows users which can read
-    ; the file to access RPC's which don't modify the state of the daemon.
-    ; readonlymacaroonpath=~/.lnd/readonly.macaroon
-                           
-   
-    ; Specify the interfaces to listen on.  One listen address per line.
-    ; All interfaces on default port (this is the default):
-    ;  listen=
-    ; Only ipv4 localhost on port 999:
-    ;   listen=127.0.0.1:999
-   
-   
-    ; Adding an external IP will advertise your node to the network. This signals
-    ; that your node is available to accept incoming channels. If you don't wish to
-    ; advertise your node, this value doesn't need to be set.
-    ;externalip=            
-   
-   
-    ; Debug logging level.
-    ; Valid levels are {trace, debug, info, warn, error, critical}
-    ; You may also specify <subsystem>=<level>,<subsystem2>=<level>,... to set
-    ; log level for individual subsystems.  Use btcd --debuglevel=show to list
-    ; available subsystems.
-    ; debuglevel=info
-   
-    ; Write CPU profile to the specified file.
-    ;cpuprofile=
-   
-    ; Enable HTTP profiling on given port -- NOTE port must be between 1024 and
-    ; 65536. The profile can be access at: http://localhost:<PORT>/debug/pprof/.
-    ;profile=
-   
-    ; The port to listen on for incoming p2p connections. The default port is 9735.
-    ; peerport=9735
-   
-    ; The port that the gRPC server will listen on.
-    ; rpcport=10009
-   
-    ; The port that the HTTP REST proxy to the gRPC server will listen on.
-    ; restport=8080
-   
-    ; The maximum number of incoming pending channels permitted per peer.
-    ; maxpendingchannels=1
-   
-    ; The default number of confirmations a channel must have before it's considered
-    ; open. We'll require any incoming channel requests to wait this many
-    ; confirmations before we consider the channel active.
-    ; defaultchanconfs=3
-                           
-    ; If true, then automatic network bootstrapping will not be attempted. This
-    ; means that your node won't attempt to automatically seek out peers on the
-    ; network.
-    ; nobootstrap=1
-   
-    ; If set, your wallet will be encrypted with the default passphrase. This isn't
-    ; recommend, as if an attacker gains access to your wallet file, they'll be able
-    ; to decrypt it. This value is ONLY to be used in testing environments.
-    ; noencryptwallet=1
-   
-   
-    [Bitcoin]
-   
-    ; If the Bitcoin chain should be active. Atm, only a single chain can be
-    ; active.
-    bitcoin.active=1
-   
-    ; The host that your local btcd daemon is listening on. This MUST be set if
-    ; neutrino mode isn't active.
-    ; bitcoin.rpchost=localhost
-                 
-    ; Username for RPC connections to btcd. This only needs to be set if neutrino
-    ; mode isn't active. By default, lnd will attempt to automatically obtain the
-    ; credentials, so this likely won't need to be set (other than for simnet mode).
-    ; bitcoin.rpcuser=kek
-   
-    ; Password for RPC connections to btcd. This only needs to be set if neutrino
-    ; mode isn't active. By default, lnd will attempt to automatically obtain the
-    ; credentials, so this likely won't need to be set (other than for simnet mode).
-    ; bitcoin.rpcpass=kek
-   
-    ; File containing the daemon's certificate file. This only needs to be set if
-    ; the node isn't on the same host as lnd.
-    ; bitcoin.rpccert=~/.btcd/rpc.cert
-   
-    ; The raw bytes of the daemon's PEM-encoded certificate chain which will be used
-    ; to authenticate the RPC connection. This only needs to be set if the btcd
-    ; node is on a remote host.
-    ; bitcoin.rawrpccert=  
-   
-    ; Use Bitcoin's test network.
-    bitcoin.testnet=1
-    ;
-    ; Use Bitcoin's simulation test network
-    ; bitcoin.simnet=0
-   
-    ; Use Bitcoin's regression test network
-    ; bitcoin.regtest=false
-   
-   
-    [Litecoin]
-   
-    ; If the Litecoin chain should be active. Atm, only a single chain can be
-    ; active.
-    ; litecoin.active=1
-   
-    ; The host that your local ltcd daemon is listening on. This MUST be set if
-    ; neutrino mode isn't active.
-    ; litecoin.rpchost=localhost
-                 
-    ; Username for RPC connections to ltcd. This only needs to be set if neutrino
-    ; mode isn't active.
-    ; litecoin.rpcuser=
-   
-    ; Password for RPC connections to ltcd. This only needs to be set if neutrino
-    ; mode isn't active.
-    ; litecoin.rpcpass=
-   
-    ; File containing the daemon's certificate file. This only needs to be set if
-    ; the node isn't on the same host as lnd.
-    ; litecoin.rpccert=~/.btcd/rpc.cert
-   
-    ; The raw bytes of the daemon's PEM-encoded certificate chain which will be used
-    ; to authenticate the RPC connection. This only needs to be set if the ltcd
-    ; node is on a remote host.
-    ; litecoin.rawrpccert=  
-   
-    ; Use Bitcoin's test network.
-    ; litecoin.testnet=1
-    ;
-    ; Use Bitcoin's simulation test network
-    ; litecoin.simnet=0
-   
-    ; Use Bitcoin's regression test network
-    ; litecoin.regtest=false
-   
-   
-    [neutrino]
-   
-    ; If the light client mode should be active or not. This mode requires less
-    ; disk space as it doesn't require one to have full-node locally. Instead,
-    ; neutrino will connect to the P2P network for all of lnd's needs.
-    neutrino.active=false
-   
-    ; Connect only to the specified peers at startup. This creates a persistent
-    ; connection to a target peer. This is recommend as there aren't many neutrino
-    ; compliant full nodes on the test network yet.
-    ;neutrino.connect=
-   
-    ; Add a peer to connect with at startup.
-    ;neutrino.addpeer=
-   
-    [autopilot]
-   
-    ; If the autopilot agent should be active or not. The autopilot agent will
-    ; attempt to automatically open up channels to put your node in an advantageous
-    ; position within the network graph.
-    ; autopilot.active=1
-   
-    ; The maximum number of channels that should be created.
-    ; autopilot.maxchannels=5
-   
-    ; The percentage of total funds that should be committed to automatic channel
-    ; establishment
-    ; autopilot.allocation=0.6
+   3. Place the config
+   ```
+   diff ~/.lnd/sample-lnd.conf ~/.lnd/lnd.conf
+   cp   ~/.lnd/sample-lnd.conf ~/.lnd/lnd.conf
+   ```
  
 # Start LND
 1. Bash completion for lncli
