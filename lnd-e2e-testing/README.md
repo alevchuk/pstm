@@ -1,4 +1,4 @@
-Step-by-step document on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet.
+This is a step-by-step technical guide on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet. Security and Backup sections are a consideration for the future - they can be skipped because Testnet does not involve real funds.
 
 Table of contents
 =================
