@@ -1,3 +1,5 @@
+Step-by-step document on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet.
+
 Table of contents
 =================
 
