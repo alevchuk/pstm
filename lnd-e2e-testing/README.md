@@ -245,7 +245,7 @@ btcd
    bitcoin.testnet=1
     
    autopilot.active=1
-   autopilot.maxchannels=20
+   autopilot.maxchannels=5
    autopilot.allocation=1.0
    ```
    
