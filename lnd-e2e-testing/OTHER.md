@@ -47,7 +47,8 @@ To work around:
 
 1. Increase the soft limit to 65536 by adding:
 ```
-*                soft    nofile          65536
+*                soft    nofile          524288
+*                hard    nofile          1048576
 ```
 to `/etc/security/limits.conf`
 2. Check `dmesg` for errors relating to limits.conf syntax
