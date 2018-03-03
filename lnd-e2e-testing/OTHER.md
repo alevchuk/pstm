@@ -32,9 +32,9 @@ autopilot.maxchannels=5
 autopilot.allocation=1.0
 ```
 
-The reason you should initially set maxchannels to more than 5 is a known issue https://github.com/lightningnetwork/lnd/issues/772
+The reason you should initially set maxchannels to not more than 5 is descirbed in https://github.com/lightningnetwork/lnd/issues/772 It is a bug in LND.
 
-On some Linux distributions you will end out running out of number of open files.
+With larger maxchannels you will end out running out of number of open files. On some Linux distributions it will take longer on others it will happend sooner depending on the default **Max open files** settings.
 
 Check the current limits:
 ```
@@ -43,9 +43,9 @@ Max open files            1024                 1048576              files
 ```
 The first number 1024 is the soft limit that will cause LND to crash if it opens that many "files" (actually Netwrok connections).
 
-To work around:
+Workaround:
 
-1. Increase the soft limit to 65536 by adding:
+1. Increase the soft limit to ~500k by adding:
 ```
 *                soft    nofile          524288
 *                hard    nofile          1048576
