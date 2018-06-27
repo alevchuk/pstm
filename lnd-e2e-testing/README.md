@@ -270,6 +270,8 @@ cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash
  # Laptop (Taurinus, 3.9G RAM):            3 days
  # Amazon AWS (t2.micro, 0.9G RAM):        ? days
  # Google VM (Intel N1, 1 VCPU, 3.7G RAM): ? day
+ 
+ # when setup is finished, you'll see "UTXN: UTXO Nursery is now fully synced"
  ```
  
  
