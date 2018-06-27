@@ -296,7 +296,7 @@ Paste the address into https://testnet.coinfaucet.eu/en/, get txn link, wait for
 lncli walletbalance  # will show unconfirmed balance within a few seconds, and confirmed in 2 hours
 ```
  
-2. Enable autopilot by commenting out the last 3 properties in lnd.conf
+2. Enable autopilot by changing "autopilot.active=0" to "autopilot.active=1" in lnd.conf
 3. Restart LND
 4. Then check activity in 1 hour:
  
