@@ -15,7 +15,7 @@ Table of contents
   * [Configure BTCD](#configure-btcd)
   * [Start BTCD - takes 1 to 4 days](#start-btcd)
   * [Configure LND](#configure-lnd)
-  * [Start LND](#start-lnd)
+  * [Start LND - takes 1 to 4 days](#start-lnd)
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
   * [Enable incoming channels](#enable-incoming-channels)
  
@@ -265,6 +265,11 @@ cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash
  
  ```
  lnd
+ 
+ # It will take several days to "graduate" blocks
+ # Laptop (Taurinus, 3.9G RAM):            3 days
+ # Amazon AWS (t2.micro, 0.9G RAM):        ? days
+ # Google VM (Intel N1, 1 VCPU, 3.7G RAM): ? day
  ```
  
  
