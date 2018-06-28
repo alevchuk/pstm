@@ -23,7 +23,7 @@ Table of contents
  
 ```
 RAM:   4 GB
-Disk: 20 GB
+Disk: 20 GB for testnet, or 150 GB for mainnet
 ```
 
 Read https://bitcoin.org/en/full-node#minimum-requirements for Bitcoin blockchain requirements.
