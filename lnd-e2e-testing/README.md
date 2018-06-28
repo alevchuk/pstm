@@ -21,6 +21,11 @@ Table of contents
  
 # System Requirements
  
+```
+RAM:   4 GB
+Disk: 20 GB
+```
+
 Read https://bitcoin.org/en/full-node#minimum-requirements for Bitcoin blockchain requirements.
  
 You need 4 GB of RAM because LND can get memory hungry at times. Yet currently my LND process runs with 1.3 GB virtual memory (of which 600 MB is in RSS).
@@ -171,6 +176,7 @@ This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTAL
  
 ```
 . ~/.bashrc
+rm -rf src/go/src/github.com/lightningnetwork
 go get -d github.com/lightningnetwork/lnd
  
 cd ~/gocode/src/github.com/lightningnetwork/lnd
@@ -186,13 +192,13 @@ make check
  
 # Build BTCD
  
-        rm -rf $GOPATH/src/github.com/Masterminds/glide
-        go get -u github.com/Masterminds/glide
- 
-        git clone https://github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
-        cd $GOPATH/src/github.com/roasbeef/btcd
-        glide install
-        go install . ./cmd/...
+   rm -rf $GOPATH/src/github.com/Masterminds/glide
+   go get -u github.com/Masterminds/glide
+
+   git clone https://github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
+   cd $GOPATH/src/github.com/roasbeef/btcd
+   glide install
+   go install . ./cmd/...
  
 # Configure BTCD
  
