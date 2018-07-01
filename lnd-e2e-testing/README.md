@@ -10,10 +10,10 @@ Table of contents
   * [Backups](#backups)
   * [Ergonomics](#ergonomics)
   * [Build Go](#build-go)
-  * [Build LND](#build-lnd)
   * [Build BTCD](#build-btcd)
   * [Configure BTCD](#configure-btcd)
   * [Start BTCD - takes 1 to 4 days](#start-btcd)
+  * [Build LND](#build-lnd)
   * [Configure LND](#configure-lnd)
   * [Start LND - takes 1 to 4 days](#start-lnd)
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
@@ -245,8 +245,11 @@ btcd
    2. Find and change the following config options in ~/.lnd/sample-lnd.conf
    ```
    debuglevel=ATPL=debug,CRTR=warn
-   bitcoin.simnet=0
+   nobootstrap=0
+   
+   bitcoin.active=1
    bitcoin.testnet=1
+   bitcoin.simnet=0
    
    autopilot.active=1
    autopilot.maxchannels=5
