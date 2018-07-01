@@ -17,7 +17,7 @@ Table of contents
   * [Start BTCD - takes 1 to 4 days](#start-btcd)
   * [Build LND](#build-lnd)
   * [Configure LND](#configure-lnd)
-  * [Start LND - takes 1 to 4 days](#start-lnd)
+  * [Start LND](#start-lnd)
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
   * [Enable incoming channels](#enable-incoming-channels)
  
