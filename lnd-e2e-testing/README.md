@@ -168,28 +168,6 @@ cd ~/src/go/src
 At the end it should say "Installed commands in /home/lightning/src/go/bin"
  
  
-# Build LND
- 
-This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
- 
-1. Fetch LND, build it, and install binaries
- 
-```
-. ~/.bashrc
-rm -rf src/go/src/github.com/lightningnetwork
-go get -d github.com/lightningnetwork/lnd
- 
-cd ~/gocode/src/github.com/lightningnetwork/lnd
-git checkout master
-git pull
-make && make install
-```
- 
-2. Run unit tests
-```
-make check
-```
- 
 # Build BTCD
  
    rm -rf $GOPATH/src/github.com/Masterminds/glide
@@ -233,6 +211,28 @@ btcd
 # Laptop (Taurinus, 3.9G RAM):            2 days
 # Amazon AWS (t2.micro, 0.9G RAM):        4 days
 # Google VM (Intel N1, 1 VCPU, 3.7G RAM): 1 day
+```
+ 
+# Build LND
+ 
+This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
+ 
+1. Fetch LND, build it, and install binaries
+ 
+```
+. ~/.bashrc
+rm -rf src/go/src/github.com/lightningnetwork
+go get -d github.com/lightningnetwork/lnd
+ 
+cd ~/gocode/src/github.com/lightningnetwork/lnd
+git checkout master
+git pull
+make && make install
+```
+ 
+2. Run unit tests
+```
+make check
 ```
  
 # Configure LND
