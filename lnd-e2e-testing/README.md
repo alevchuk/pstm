@@ -266,7 +266,7 @@ make check
 1. Bash completion for lncli, which was contributed to LND by [Andreas M. Antonopoulos](https://github.com/lightningnetwork/lnd/commits/master/contrib/lncli.bash-completion)
  
 ```
-cp /home/lightning/src/go/src/github.com/lightningnetwork/lnd/contrib/lncli.bash-completion /etc/bash_completion.d/lncli
+cp /home/lightning/gocode/src/github.com/lightningnetwork/lnd/contrib/lncli.bash-completion /etc/bash_completion.d/lncli
 # in Debian install "bash-completion" and uncomment "enable bash completion" in /etc/bash.bashrc
 ```
  
