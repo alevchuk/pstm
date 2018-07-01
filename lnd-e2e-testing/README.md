@@ -277,7 +277,7 @@ cp /home/lightning/gocode/src/github.com/lightningnetwork/lnd/contrib/lncli.bash
  ```
  lnd
  
- # It will take several days to "graduate" blocks
+ # Usually this is fast, yet in some cases takes several days to "graduate" blocks
  # Laptop (Taurinus, 3.9G RAM):            3 days
  # Amazon AWS (t2.micro, 0.9G RAM):        ? days
  # Google VM (Intel N1, 1 VCPU, 3.7G RAM): ? day
