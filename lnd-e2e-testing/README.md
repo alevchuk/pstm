@@ -1,4 +1,6 @@
-This is a step-by-step technical guide on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet. Security and Backup sections are a consideration for the future - they can be skipped because Testnet does not involve real funds.
+This is a step-by-step technical guide on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet with the goal of becoming a relay and collecting fees.
+
+Security and Backup sections are for consideration of migrating to Mainnet - before that they can be skipped because Testnet does not involve real funds.
  
 Once you have LND running, read manitanance procedures in [OTHER.md](https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/OTHER.md)
  
