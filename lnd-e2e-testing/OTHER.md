@@ -115,7 +115,7 @@ lncli listchannels | awk -F'"' '/point/ {print $4}' | while read cp; do
 Pay Invoice Retry
 =================
 
-On testnet the graph is not well connected, so as you add more channels to get connectivity, you may need to keep retying to pay an invoice. 
+On testnet the graph is not well connected, so as Autopilot adds more channels to get connectivity, you may need to keep retying to pay an invoice. 
 
 1. Side A: Create an invoice with longer expiry (default expiry is 1 hour, here 5867 is the requested amount in Satoshi):
 ```
