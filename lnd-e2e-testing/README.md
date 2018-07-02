@@ -244,7 +244,7 @@ make check
    curl https://raw.githubusercontent.com/lightningnetwork/lnd/master/sample-lnd.conf > ~/.lnd/sample-lnd.conf
    ```
    
-   2. Find and change the following config options in ~/.lnd/sample-lnd.conf
+   2. Find, uncomment (remove ";"), and change the following config options in ~/.lnd/sample-lnd.conf
    ```
    debuglevel=ATPL=debug,CRTR=warn
    nobootstrap=0
@@ -252,6 +252,8 @@ make check
    bitcoin.active=1
    bitcoin.testnet=1
    bitcoin.simnet=0
+   
+   litecoin.active=0
    
    autopilot.active=1
    autopilot.maxchannels=5
