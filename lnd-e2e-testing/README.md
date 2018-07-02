@@ -278,13 +278,6 @@ cp /home/lightning/gocode/src/github.com/lightningnetwork/lnd/contrib/lncli.bash
  
  ```
  lnd
- 
- # Usually this is fast, yet in some cases takes several days to "graduate" blocks
- # Laptop (Taurinus, 3.9G RAM):            3 days
- # Amazon AWS (t2.micro, 0.9G RAM):        ? days
- # Google VM (Intel N1, 1 VCPU, 3.7G RAM): ? day
- 
- # when setup is finished, you'll see "UTXN: UTXO Nursery is now fully synced"
  ```
  
  
@@ -293,6 +286,15 @@ cp /home/lightning/gocode/src/github.com/lightningnetwork/lnd/contrib/lncli.bash
  
 ```
 lncli create
+
+# LND logs should start printing:
+
+2018-07-02 15:44:58.038 [INF] LNWL: Caught up to height 760000
+2018-07-02 15:44:59.956 [INF] LNWL: Caught up to height 770000
+2018-07-02 15:45:01.920 [INF] LNWL: Caught up to height 780000
+2018-07-02 15:45:03.974 [INF] LNWL: Caught up to height 790000
+2018-07-02 15:45:06.014 [INF] LNWL: Caught up to height 800000
+2018-07-02 15:45:08.038 [INF] LNWL: Caught up to height 810000
 ```
  
 # Fund your LND wallet and enable AutoPilot
