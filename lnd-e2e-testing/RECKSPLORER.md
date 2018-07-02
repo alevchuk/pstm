@@ -37,7 +37,7 @@ From admin account run
 
     sudo mkdir ~recksplorer/.lnd
     sudo cp ~lightning/.lnd/tls.cert ~recksplorer/.lnd/
-    sudo cp ~lightning/.lnd/admin.macaroon ~recksplorer/.lnd/
+    sudo cp ~lightning/.lnd/readonly.macaroon ~recksplorer/.lnd/
     sudo chown -R recksplorer ~recksplorer/.lnd
     
 ## 6. Start recksplorer
