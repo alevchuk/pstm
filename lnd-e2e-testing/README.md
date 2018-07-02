@@ -295,6 +295,8 @@ lncli create
 2018-07-02 15:45:03.974 [INF] LNWL: Caught up to height 790000
 2018-07-02 15:45:06.014 [INF] LNWL: Caught up to height 800000
 2018-07-02 15:45:08.038 [INF] LNWL: Caught up to height 810000
+...
+Done catching up block hashes
 ```
  
 # Fund your LND wallet and enable AutoPilot
