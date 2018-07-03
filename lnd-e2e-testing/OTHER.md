@@ -24,40 +24,16 @@ chmod +x ./pay_or_get_paid.py
 Open many channels
 ==================
 
-Safe default config for AutoPilot is:
+https://github.com/lightningnetwork/lnd/issues/772 **was** a bug in LND.
 
+Check that:
 ```
-autopilot.active=1
-autopilot.maxchannels=5
-autopilot.allocation=1.0
+lsof -n | grep ^lnd -c
 ```
+shows less than 1k connections (for me this numbers stays as low as 40)
 
-The reason you should initially set maxchannels to not more than 5 is descirbed in https://github.com/lightningnetwork/lnd/issues/772 It is a bug in LND.
 
-With larger maxchannels you will end out running out of number of open files. On some Linux distributions it will take longer on others it will happend sooner depending on the default **Max open files** settings.
-
-Check the current limits:
-```
-cat /proc/$(pgrep lnd)/limits  | grep files
-Max open files            1024                 1048576              files
-```
-The first number 1024 is the soft limit that will cause LND to crash if it opens that many "files" (actually Netwrok connections).
-
-Workaround:
-
-1. Increase the soft limit to ~500k by adding:
-```
-*                soft    nofile          524288
-*                hard    nofile          1048576
-```
-to `/etc/security/limits.conf`
-2. Check `dmesg` for errors relating to limits.conf syntax
-3. Stop LND and log-out/exit of the bash shell 
-4. Start a new shell session (e.g. open a new Screen/Tmux window)
-5. Star LND
-6. Check that new limits are set: `cat /proc/$(pgrep lnd)/limits  | grep files`
-
-Now, you can increase `autopilot.maxchannels`  in `~/.lnd/lnd.conf` and restart LND again
+Increase `autopilot.maxchannels`  in `~/.lnd/lnd.conf` and restart LND again
 ```
 autopilot.maxchannels=30
 ```
