@@ -234,19 +234,13 @@ make && make install
  
 2. Run unit tests
 ```
+ln -s ~/src/go/src/github.com/roasbeef/btcd ~/gocode/src/github.com/roasbeef/btcd
+cd ~/gocode/src/github.com/roasbeef/btcd
+git fetch
+
 make check
 ```
 
-**July 2018 UPDATE:** Unit tests runner stopped working for me. Maybe some issues after LND building was migrated to Makefile.
-```
- Fetching btcd.
-go get -d github.com/roasbeef/btcd
- Compiling btcd dependencies.
-cd /home/ligtning/gocode/src/github.com/roasbeef/btcd && git checkout a03db407e40d3b66ea29984263bbc8bf4d2f04c4 && glide install
-/bin/sh: 1: cd: can't cd to /home/ligtning/gocode/src/github.com/roasbeef/btcd
-Makefile:116: recipe for target 'btcd' failed
-make: *** [btcd] Error 2
-```
  
 # Configure LND
  
