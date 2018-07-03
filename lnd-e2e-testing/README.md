@@ -237,7 +237,7 @@ make && make install
 make check
 ```
 
-Unit tests runner stopped working for me. Maybe some issues after LND building was migrated to Makefile.
+**July 2018 UPDATE:** Unit tests runner stopped working for me. Maybe some issues after LND building was migrated to Makefile.
 ```
  Fetching btcd.
 go get -d github.com/roasbeef/btcd
