@@ -148,7 +148,7 @@ export GOROOT_BOOTSTRAP=/usr/lib/go-1.6
  
 export GOROOT=/home/lightning/src/go
 export GOPATH=~/gocode
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
  
 3. Fetch new go
@@ -223,7 +223,8 @@ This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTAL
  
 ```
 . ~/.bashrc
-rm -rf src/go/src/github.com/lightningnetwork
+rm ~/src/go/bin/{lncli,lnd}
+rm -rf ~/src/go/src/github.com/lightningnetwork
 go get -d github.com/lightningnetwork/lnd
  
 cd ~/gocode/src/github.com/lightningnetwork/lnd
