@@ -223,7 +223,8 @@ This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTAL
  
 ```
 . ~/.bashrc
-rm ~/src/go/bin/{lncli,lnd}
+rm $GOROOT/bin/{lncli,lnd}
+rm $GOPATH/bin/{lncli,lnd}
 rm -rf ~/src/go/src/github.com/lightningnetwork
 go get -d github.com/lightningnetwork/lnd
  
