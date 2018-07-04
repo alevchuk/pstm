@@ -20,7 +20,7 @@ Table of contents
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
   * [Keep track of your total balance](#keep-track-of-your-total-balance)
   * [Enable incoming channels](#enable-incoming-channels)
-  * [What's Next?]()
+  * [What's Next?](#whats-next)
  
 # System Requirements
  
