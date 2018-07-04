@@ -223,14 +223,17 @@ This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTAL
  
 ```
 . ~/.bashrc
+
 rm $GOROOT/bin/{lncli,lnd}
 rm $GOPATH/bin/{lncli,lnd}
-rm -rf ~/src/go/src/github.com/lightningnetwork
+rm -rf $GOROOT/src/github.com/lightningnetwork
 go get -d github.com/lightningnetwork/lnd
  
-cd ~/gocode/src/github.com/lightningnetwork/lnd
+cd $GOPATH/src/github.com/lightningnetwork/lnd
 git checkout master
 git pull
+
+cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
  
