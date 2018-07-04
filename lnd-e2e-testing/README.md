@@ -19,6 +19,7 @@ Table of contents
   * [Configure LND](#configure-lnd)
   * [Start LND](#start-lnd)
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
+  * [Keep track of your total balance](#keep-track-of-your-total-balance)
   * [Enable incoming channels](#enable-incoming-channels)
  
 # System Requirements
