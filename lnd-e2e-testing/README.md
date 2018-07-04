@@ -146,9 +146,9 @@ export GOOS=linux
 export GOARCH=amd64
 export GOROOT_BOOTSTRAP=/usr/lib/go-1.6
  
-export GOROOT=/home/lightning/src/go
-export GOPATH=~/gocode
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOROOT=$HOME/src/go
+export GOPATH=$HOME/gocode
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 ```
  
 3. Fetch new go
@@ -164,10 +164,10 @@ git checkout go1.10.2
 4. Build new go
 ```
 . ~/.bashrc
-cd ~/src/go/src
+cd $GOROOT/src
 ./make.bash
 ```
-At the end it should say "Installed commands in /home/lightning/src/go/bin"
+At the end it should say "Installed commands in $GOROOT/bin"
  
  
 # Build BTCD
