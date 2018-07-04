@@ -334,7 +334,7 @@ lncli listchannels  | grep active | sort | uniq -c  # number of open channels
 lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inbound peers
 ```
  
-5. Keep track of your total balance:
+# Keep track of your total balance
  
 Use [get_balance_report.py script](get_balance_report.py)
 ```
