@@ -233,7 +233,6 @@ cd $GOPATH/src/github.com/lightningnetwork/lnd
 git checkout master
 git pull
 
-cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
  
@@ -243,6 +242,7 @@ ln -s $GOROOT/src/github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
 cd $GOPATH/src/github.com/roasbeef/btcd
 git fetch
 
+cd $GOPATH/src/github.com/lightningnetwork/lnd
 make check
 ```
 
