@@ -2,7 +2,6 @@ This is a step-by-step technical guide on how to setup [LND](https://github.com/
 
 Security and Backup sections are for consideration of migrating to Mainnet - they can be skipped for now because Testnet does not involve real funds.
  
-Once you have LND running, read manitanance procedures in [OTHER.md](https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/OTHER.md)
  
 Table of contents
 =================
@@ -21,6 +20,7 @@ Table of contents
   * [Fund your LND wallet and enable AutoPilot](#fund-your-lnd-wallet-and-enable-autopilot)
   * [Keep track of your total balance](#keep-track-of-your-total-balance)
   * [Enable incoming channels](#enable-incoming-channels)
+  * [What's Next?]()
  
 # System Requirements
  
@@ -383,3 +383,8 @@ echo hi | nc <external_ip_of_LND_host> 9735
 lnc logs will show
  
       2018-01-08 20:41:07.856 [ERR] CMGR: Can't accept connection: unexpected EOF
+      
+      
+# What's Next?
+
+Once you have LND running, do manitanance procedures as described in [OTHER.md](https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/OTHER.md)
