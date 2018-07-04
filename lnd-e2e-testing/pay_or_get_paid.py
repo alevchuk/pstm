@@ -218,7 +218,7 @@ while True:
         result = run('lncli payinvoice {}'.format(pay_req), timeout=60)
       except Exception as e:
         print(e)
-        print("payinvoice FAILED: {}, dropping all further invoces until 'switch'!".format(result))
+        print("payinvoice FAILED: {}, dropping all further invoces until 'switch'!".format(e))
         drop = True
       else:
         if result['payment_error'] == '':
