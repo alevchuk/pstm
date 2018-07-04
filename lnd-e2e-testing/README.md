@@ -341,7 +341,7 @@ Use [get_balance_report.py script](get_balance_report.py)
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/get_balance_report.py
 chmod +x ~/get_balance_report.py
 
-~/get_balance_report.py | column -t; while :; do sleep 10; ~/get_balance_report.py | grep -v Wall ;  done
+while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py ) | column -t; date; sleep 60; done
 ```
  
 As channels open and close you may see total balance go down but should it recover eventually.
