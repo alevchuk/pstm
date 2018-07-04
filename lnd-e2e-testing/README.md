@@ -342,10 +342,13 @@ Use [get_balance_report.py script](get_balance_report.py)
 mkdir ~/lnd-e2e-testing
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/lnd-e2e-testing/get_balance_report.py
 chmod +x ~/lnd-e2e-testing/get_balance_report.py
-~/lnd-e2e-testing/get_balance_report.py > ~/balance_history.tab
+~/lnd-e2e-testing/get_balance_report.py >> ~/balance_history.tab
 
 # Track balance
 while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py ) | column -t; date; sleep 60; done
+
+# Record balance
+~/lnd-e2e-testing/get_balance_report.py | grep -v Time  >> ~/balance_history.tab
 ```
  
 As channels open and close you may see total balance go down but should it recover eventually.
