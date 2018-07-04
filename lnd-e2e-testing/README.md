@@ -236,8 +236,8 @@ make && make install
  
 2. Run unit tests
 ```
-ln -s ~/src/go/src/github.com/roasbeef/btcd ~/gocode/src/github.com/roasbeef/btcd
-cd ~/gocode/src/github.com/roasbeef/btcd
+ln -s $GOROOT/src/github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
+cd $GOPATH/src/github.com/roasbeef/btcd
 git fetch
 
 make check
