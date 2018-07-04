@@ -338,8 +338,9 @@ lncli listpeers | grep inbound | uniq -c  # to be a relay you'll need to get inb
  
 Use [get_balance_report.py script](get_balance_report.py)
 ```
-curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/get_balance_report.py
-chmod +x ~/get_balance_report.py
+mkdir ~/lnd-e2e-testing
+curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ~/lnd-e2e-testing/get_balance_report.py
+chmod +x ~/lnd-e2e-testing/get_balance_report.py
 
 while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py ) | column -t; date; sleep 60; done
 ```
