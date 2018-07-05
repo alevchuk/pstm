@@ -12,6 +12,7 @@ wallet = int(wallet_balance["confirmed_balance"])
 wallet_unconfirmed = int(wallet_balance["unconfirmed_balance"])
 channel = int(channel_balance["balance"])
 pending = int(channel_balance["pending_open_balance"])
+total = wallet + wallet_unconfirmed + pending + channel
 
 if len(sys.argv) > 1 and sys.argv[1] == '--json':
     print(json.dumps({
@@ -19,7 +20,7 @@ if len(sys.argv) > 1 and sys.argv[1] == '--json':
       'unconfirmed': "{:,}".format(wallet_unconfirmed),
       'pending': "{:,}".format(pending),
       'channel': "{:,}".format(channel),
-      'total': "{:,}".format(wallet + wallet_unconfirmed + pending + channel)}, sort_keys=True))
+      'total': "{:,}".format(total)}, sort_keys=True))
 else:
     print(
       "Time\t\t\t"
@@ -34,7 +35,7 @@ else:
       "\t{:,}".format(wallet_unconfirmed) + \
       "\t{:,}".format(pending) + \
       "\t{:,}".format(channel) + \
-      "\t{:,}".format(wallet + wallet_unconfirmed + channel))
+      "\t{:,}".format(total))
 
 # Setup:
 # chmod +x ~/lnd-e2e-testing/get_balance_report.py
