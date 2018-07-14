@@ -184,7 +184,7 @@ while True:
       print("Cannot settle after {}s, time to switch".format(seconds_passed))
       s.mysend("switch")
 
-      log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
+      log(json.dumps(run(GET_BALANCE), sort_keys=True))
       log("Switch. Total sat_received was {:,} ({:,} payments)".format(
         sat_received,
         sat_received / MICROPAYMENT))
@@ -201,7 +201,7 @@ while True:
     retry = False
 
     if pay_req == "switch":
-      log(json.dumps(run(GET_BALANCE + ' --json'), sort_keys=True))
+      log(json.dumps(run(GET_BALANCE), sort_keys=True))
       log("Switch. Total sat_paied was {:,} ({:,} payments)".format(
         sat_paied,
         sat_paied / MICROPAYMENT))
