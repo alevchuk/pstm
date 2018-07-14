@@ -41,7 +41,7 @@ print(
 # chmod +x ~/lnd-e2e-testing/get_balance_report.py
 # ~/lnd-e2e-testing/get_balance_report.py > ~/balance_history.tab
 # corntab -e  # cron job to record balance every hour:
-# 0 *  *   *   *     ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab
+# 0   *  *   *   *     ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab
 
 # Check balance:
 # (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py | sort) | column -t
