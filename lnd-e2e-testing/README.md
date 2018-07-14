@@ -387,4 +387,4 @@ lnc logs will show
 
 # What's Next?
 
-Once you have LND running, do manitanance procedures as described in [OTHER.md](https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/OTHER.md)
+Once you have LND running, consider the manitanance procedures described in [OTHER.md](https://github.com/alevchuk/pstm/blob/master/lnd-e2e-testing/OTHER.md)
