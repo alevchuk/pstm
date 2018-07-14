@@ -44,7 +44,7 @@ print(
 # 0   *  *   *   *     ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab
 
 # Check balance:
-# (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py | sort) | column -t
+# while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py ) | column -t; date; sleep 60; done
 #
 # Example Output:
 # Time                   Wallet       Unconfirmed  Pending    Channel      ChainFees  Total
