@@ -16,15 +16,17 @@ pending = int(channel_balance["pending_open_balance"])
 total = wallet + wallet_unconfirmed + pending + channel
 chain_fees = sum([int(i["total_fees"]) for i in chain_txns])
 
-print(
-  "Time\t\t\t"
-  "Wallet\t\t"
-  "Unconfirmed\t"
-  "Pending\t\t"
-  "Channel\t\t"
-  "ChainFees\t\t"
-  "Total"
-)
+if len(sys.argv) < 2 or sys.argv[1] != '--no-header':
+    print(
+      "Time\t\t\t"
+      "Wallet\t\t"
+      "Unconfirmed\t"
+      "Pending\t\t"
+      "Channel\t\t"
+      "ChainFees\t\t"
+      "Total"
+    )
+
 print(
   date + \
   "\t{:,}".format(wallet) + \
@@ -38,9 +40,8 @@ print(
 # Setup:
 # chmod +x ~/lnd-e2e-testing/get_balance_report.py
 # ~/lnd-e2e-testing/get_balance_report.py > ~/balance_history.tab
-
-# Update balance:
-# ~/lnd-e2e-testing/get_balance_report.py | grep -v Time  >> ~/balance_history.tab
+# corntab -e  # cron job to record balance every hour:
+# 0 *  *   *   *     ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab
 
 # Check balance:
 # (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py | sort) | column -t
