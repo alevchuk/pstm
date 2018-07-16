@@ -45,13 +45,17 @@ print(
 # Setup:
 # chmod +x ~/lnd-e2e-testing/get_balance_report.py
 # ~/lnd-e2e-testing/get_balance_report.py > ~/balance_history.tab
-
-# Update balance:
-# ~/lnd-e2e-testing/get_balance_report.py | grep -v Time  >> ~/balance_history.tab
+# crontab -e
+## Text-editor will open, paste the following, save, and exit:
+'''
+SHELL=/bin/bash
+# m h  dom mon dow   command
+0   *  *   *   *     (source ~/.profile; ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab) 2> /tmp/stderr_cron_get_balance_report
+'''
 
 # Check balance:
-# (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py | sort) | column -t
-#
+# while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py) | column -t; sleep 60; done
+
 # Example Output:
 # Time                       Wallet       Pending      Channel      Fees         Balance      Balance+Fees
 # 2018-07-15T13:00:01-07:00  1,599,749    208,344,076  150,652,120  248,117      360,595,945  360,844,062
