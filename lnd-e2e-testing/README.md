@@ -145,6 +145,7 @@ This is based on https://golang.org/doc/install/source
 
 ```
 apt-get install golang-1.6
+apt-get install git
 ```
 
 --- after this all commands should be run under the "lightning" account ---
