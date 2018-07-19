@@ -141,13 +141,15 @@ Use your "desktop" account to sudo into root and lightning as needed
 
 This is based on https://golang.org/doc/install/source
 
-1. Fetch bootstrap go
+1. Fetch bootstrap go (as root)
 
 ```
 apt-get install golang-1.6
 ```
 
-2. Set bootstrap path and gopath. To ~/.profile add:
+--- after this all commands should be run under the "lightning" account ---
+
+2. Set bootstrap path and gopath. To ~lightning/.profile add:
 
 ```
 export GOOS=linux
