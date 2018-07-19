@@ -58,12 +58,14 @@ For testnet the disk usage will be 8x smaller than the 145 GB mainnet recommenda
 1. When setting up your laptop, make firewall _Drop all_ Incoming Connections _before_ connecting to the network. Later you may need to open 1 port for Lightning (see [Enable incoming channels](#enable-incoming-channels))
 
 ```
-echo ":INPUT DROP
+echo "*filter
+:INPUT DROP
 :FORWARD DROP
 :OUTPUT ACCEPT
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A OUTPUT -o lo -j ACCEPT" | iptables-restore
+-A OUTPUT -o lo -j ACCEPT
+COMMIT" | iptables-restore
 ```
 
 Persist firewall across reboots:
