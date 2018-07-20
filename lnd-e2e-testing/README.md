@@ -14,7 +14,7 @@ Table of contents
   * [System Requirements](#system-requirements)
   * [Security](#security)
   * [Backups](#backups)
-  * [Ergonomics](#ergonomics)
+  * [CLI Ergonomics](#cli-ergonomics)
   * [Build Go](#build-go)
   * [Build BTCD](#build-btcd)
   * [Configure BTCD](#configure-btcd)
