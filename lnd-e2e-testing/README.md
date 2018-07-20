@@ -183,6 +183,8 @@ At the end it should say "Installed commands in $GOROOT/bin"
 
 # Get LND + BTCD
 
+This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
+
 ```
 . ~/.profile
 go get -d github.com/lightningnetwork/lnd
@@ -231,8 +233,6 @@ btcd
 ```
 
 # Build LND
-
-This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
 
 1. Fetch LND, build it, and install binaries
 
