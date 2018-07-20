@@ -1,6 +1,6 @@
 This is a step-by-step technical guide on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet.
 
-Possible use-cases:
+Use-cases:
 * Learning
 * Contirbuting to the technology by doing experiments
 * Becoming a relay and collecting fees
@@ -183,7 +183,6 @@ At the end it should say "Installed commands in $GOROOT/bin"
 
 # Build BTCD
 
-   rm -rf $GOPATH/src/github.com/Masterminds/glide
    go get -u github.com/Masterminds/glide
 
    git clone https://github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
@@ -234,16 +233,8 @@ This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTAL
 
 ```
 . ~/.profile
-
-rm $GOROOT/bin/{lncli,lnd}
-rm $GOPATH/bin/{lncli,lnd}
-rm -rf $GOROOT/src/github.com/lightningnetwork
 go get -d github.com/lightningnetwork/lnd
-
 cd $GOPATH/src/github.com/lightningnetwork/lnd
-git checkout master
-git pull
-
 make && make install
 ```
 
