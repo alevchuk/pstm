@@ -180,15 +180,19 @@ cd $GOROOT/src
 ```
 At the end it should say "Installed commands in $GOROOT/bin"
 
+# Get LND + BTCD
+
+```
+. ~/.profile
+go get -d github.com/lightningnetwork/lnd
+```
 
 # Build BTCD
 
-   go get -u github.com/Masterminds/glide
-
-   git clone https://github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
-   cd $GOPATH/src/github.com/roasbeef/btcd
-   glide install
-   go install . ./cmd/...
+```
+cd $GOPATH/src/github.com/lightningnetwork/lnd
+make btcd && make install
+```
 
 # Configure BTCD
 
@@ -232,8 +236,6 @@ This is based on https://github.com/lightningnetwork/lnd/blob/master/docs/INSTAL
 1. Fetch LND, build it, and install binaries
 
 ```
-. ~/.profile
-go get -d github.com/lightningnetwork/lnd
 cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
