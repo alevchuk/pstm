@@ -197,9 +197,9 @@ make btcd && make install
 
 # Configure BTCD
 
-1. Copy the official config sample https://github.com/Roasbeef/btcd/blob/master/sample-btcd.conf
+1. Copy the official config sample https://github.com/btcsuite/btcd/blob/master/sample-btcd.conf
    ```
-   curl https://raw.githubusercontent.com/Roasbeef/btcd/master/sample-btcd.conf > ~/.btcd/sample-btcd.conf
+   curl https://raw.githubusercontent.com/btcsuite/btcd/master/sample-btcd.conf > ~/.btcd/sample-btcd.conf
    ```
 
 2. Find, uncomment (remove ";") and set the following config option
