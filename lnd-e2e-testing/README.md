@@ -16,6 +16,7 @@ Table of contents
   * [Backups](#backups)
   * [CLI Ergonomics](#cli-ergonomics)
   * [Build Go](#build-go)
+  * [Get LND + BTCD](#get-lnd--btcd)
   * [Build BTCD](#build-btcd)
   * [Configure BTCD](#configure-btcd)
   * [Start BTCD - takes 1 to 4 days](#start-btcd)
