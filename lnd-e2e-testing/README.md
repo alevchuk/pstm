@@ -168,7 +168,7 @@ cd ~/src
 git clone https://go.googlesource.com/go
 cd go
 git fetch
-git checkout go1.10.2
+git checkout go1.10.3
 ```
 
 4. Build new go
