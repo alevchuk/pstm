@@ -154,12 +154,10 @@ apt-get install git
 2. Set bootstrap path and gopath. To ~lightning/.profile add:
 
 ```
-export GOOS=linux
-export GOARCH=amd64
 export GOROOT_BOOTSTRAP=/usr/lib/go-1.6
 
-export GOROOT=$HOME/src/go
-export GOPATH=$HOME/gocode
+export GOROOT=~/src/go
+export GOPATH=~/gocode
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 ```
 
