@@ -4,7 +4,7 @@ import subprocess
 import json
 import sys
  
-date = subprocess.check_output(["date", "+%Y-%M-%dT%H:%M:%S%z"]).decode("utf-8").strip()  # shows local Timezone
+date = subprocess.check_output(["date", "+%Y-%m-%dT%H:%M:%S%z"]).decode("utf-8").strip()  # shows local Timezone
 wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]).decode("utf-8"))
 channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]).decode("utf-8"))
 pendingchannels = json.loads(subprocess.check_output(["lncli", "pendingchannels"]).decode("utf-8"))
