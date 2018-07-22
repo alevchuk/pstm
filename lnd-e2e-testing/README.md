@@ -128,7 +128,7 @@ Configure ~/.screenrc so it lables tabs, has good scrollback history, and always
     defscrollback 60000
     maptimeout 0
     defhstatus 'amazon'
-    hardstatus alwayslastline '%{= G}[ %{G} %h %{g} ][%= %{= w}%?%-Lw%?%{= B}%n*%f %t%?%{= B}(%u)%?%{= w}%+Lw%?%= %{= g}][%{B} %Y %{g}]'
+    hardstatus alwayslastline '%{= G}[ %{G} %h %{g} ][%= %{= w}%?%-Lw%?%{= B}%n*%f %t%?%{= B}(%u)%?%{= w}%+Lw%?%= %{= g}][%{B} %Y-%m-%d %{W}%c %{g}]'
 
 Use your "desktop" account to sudo into root and lightning as needed
 
