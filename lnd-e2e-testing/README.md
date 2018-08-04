@@ -190,9 +190,10 @@ go get -d github.com/lightningnetwork/lnd
 
 # Build BTCD
 
+(`make btcd` will bulild and also install btcd and btcctl in `$GOPATH/bin`)
 ```
 cd $GOPATH/src/github.com/lightningnetwork/lnd
-make btcd && make install
+make btcd
 ```
 
 # Configure BTCD
