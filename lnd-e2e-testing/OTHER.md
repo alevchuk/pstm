@@ -1,3 +1,22 @@
+Upgrade BTCD
+=============
+```
+cd $GOPATH/src/github.com/btcsuute/btcd
+git pull
+cd $GOPATH/src/github.com/lightningnetwork/lnd
+make btcd
+
+ls -l $GOPATH/bin  # see timestamps
+```
+
+Upgrade LND
+===========
+```
+cd $GOPATH/src/github.com/lightningnetwork/lnd
+git pull
+make && make install
+```
+
 Pay back and forth between Node A and Node B 
 =============================================
 
