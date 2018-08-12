@@ -383,7 +383,7 @@ lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 4. Test with netcat from a different host
 
 ```
-echo hi | nc <external_ip_of_LND_host> 9735
+echo hi | nc -v <external_ip_of_LND_host> 9735
 ```
 
 lnc logs will show
