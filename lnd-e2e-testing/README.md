@@ -351,7 +351,7 @@ while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py 
 crontab -e
 '''
 ### Text-editor will open, paste the following, save, and exit:
-'''
+
 SHELL=/bin/bash
 # m h  dom mon dow   command
 0   *  *   *   *     (source ~/.profile; ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab) 2> /tmp/stderr_cron_get_balance_report
