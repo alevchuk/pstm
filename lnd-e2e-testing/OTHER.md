@@ -12,6 +12,7 @@ ls -l $GOPATH/bin  # see timestamps
 Upgrade LND
 ===========
 ```
+make clean
 cd $GOPATH/src/github.com/lightningnetwork/lnd
 git pull
 make && make install
