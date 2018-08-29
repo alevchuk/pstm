@@ -4,6 +4,7 @@ Upgrade BTCD
 cd $GOPATH/src/github.com/btcsuute/btcd
 git pull
 cd $GOPATH/src/github.com/lightningnetwork/lnd
+make clean
 make btcd
 
 ls -l $GOPATH/bin  # see timestamps
@@ -12,9 +13,9 @@ ls -l $GOPATH/bin  # see timestamps
 Upgrade LND
 ===========
 ```
-make clean
 cd $GOPATH/src/github.com/lightningnetwork/lnd
 git pull
+make clean
 make && make install
 ```
 
