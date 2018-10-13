@@ -1,30 +1,37 @@
 #!/usr/bin/python3
- 
+
 import subprocess
 import json
 import sys
- 
+
+if len(sys.argv) > 1 and '--testnet' in sys.argv:
+  net = ['--network=testnet']
+else:
+  net = []
+
 date = subprocess.check_output(["date", "+%Y-%m-%dT%H:%M:%S%z"]).decode("utf-8").strip()  # shows local Timezone
-wallet_balance = json.loads(subprocess.check_output(["lncli", "walletbalance"]).decode("utf-8"))
-channel_balance = json.loads(subprocess.check_output(["lncli", "channelbalance"]).decode("utf-8"))
-pendingchannels = json.loads(subprocess.check_output(["lncli", "pendingchannels"]).decode("utf-8"))
-chain_txns = json.loads(subprocess.check_output(["lncli", "listchaintxns"]).decode("utf-8"))["transactions"]
- 
+wallet_balance = json.loads(subprocess.check_output(["lncli"] + net + ["walletbalance"]).decode("utf-8"))
+channel_balance = json.loads(subprocess.check_output(["lncli"] + net + ["channelbalance"]).decode("utf-8"))
+pendingchannels = json.loads(subprocess.check_output(["lncli"] + net + ["pendingchannels"]).decode("utf-8"))
+chain_txns = json.loads(subprocess.check_output(["lncli"] + net + ["listchaintxns"]).decode("utf-8"))["transactions"]
+channels = json.loads(subprocess.check_output(["lncli"] + net + ["listchannels"]).decode("utf-8"))["channels"]
+
 wallet = int(wallet_balance["confirmed_balance"])
 wallet_unconfirmed = int(wallet_balance["unconfirmed_balance"])
- 
+
 limbo_balance = int(pendingchannels['total_limbo_balance'])  # The balance in satoshis encumbered in pending channels
 channel = int(channel_balance["balance"])
 chain_fees = sum([int(i["total_fees"]) for i in chain_txns])
+commit_fees = sum([int(i["commit_fee"]) for i in channels])  # Fees to be paid for commitment transactions
 fees = chain_fees  # TODO: add Lightning relay fees
 
 pending = int(channel_balance["pending_open_balance"]) + limbo_balance
 balance = wallet + wallet_unconfirmed + pending + channel
- 
+
 if len(sys.argv) < 2 or sys.argv[1] != '--no-header':
     print(
       "Time\t\t\t"
- 
+
       "Wallet\t\t"
       "Pending\t\t"
       "Channel\t\t"
@@ -32,7 +39,7 @@ if len(sys.argv) < 2 or sys.argv[1] != '--no-header':
       "Balance\t\t"
       "Balance+Fees"
     )
- 
+
 print(
   date + \
   "\t{:,}".format(wallet) + \
@@ -42,7 +49,7 @@ print(
   "\t{:,}".format(balance) + \
   "\t{:,}".format(balance + fees)
 )
- 
+
 # Setup:
 '''
 chmod +x ~/lnd-e2e-testing/get_balance_report.py
@@ -55,7 +62,7 @@ SHELL=/bin/bash
 # m h  dom mon dow   command
 0   *  *   *   *     (source ~/.profile; ~/lnd-e2e-testing/get_balance_report.py --no-header >> ~/balance_history.tab) 2> /tmp/stderr_cron_get_balance_report
 '''
- 
+
 # Check balance:
 '''
 while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py) | column -t; sleep 60; done
