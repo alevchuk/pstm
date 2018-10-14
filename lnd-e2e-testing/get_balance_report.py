@@ -23,12 +23,12 @@ limbo_balance = int(pendingchannels['total_limbo_balance'])  # The balance in sa
 channel = int(channel_balance["balance"])
 chain_fees = sum([int(i["total_fees"]) for i in chain_txns])
 commit_fees = sum([int(i["commit_fee"]) for i in channels])  # Fees to be paid for commitment transactions
-fees = chain_fees  # TODO: add Lightning relay fees
+fees = chain_fees + commit_fees  # TODO: add Lightning relay fees (1) spent; (2) earned
 
 pending = int(channel_balance["pending_open_balance"]) + limbo_balance
 balance = wallet + wallet_unconfirmed + pending + channel
 
-if len(sys.argv) < 2 or sys.argv[1] != '--no-header':
+if len(sys.argv) > 1 and '--no-header' in sys.argv:
     print(
       "Time\t\t\t"
 
