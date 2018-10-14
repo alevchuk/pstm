@@ -28,7 +28,7 @@ fees = chain_fees + commit_fees  # TODO: add Lightning relay fees (1) spent; (2)
 pending = int(channel_balance["pending_open_balance"]) + limbo_balance
 balance = wallet + wallet_unconfirmed + pending + channel
 
-if len(sys.argv) > 1 and '--no-header' in sys.argv:
+if len(sys.argv) == 0 or '--no-header' not in sys.argv:
     print(
       "Time\t\t\t"
 
