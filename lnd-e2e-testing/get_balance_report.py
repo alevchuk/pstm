@@ -30,7 +30,7 @@ commit_fees += sum([int(i["commit_fee"]) for i in (
   pendingchannels["pending_closing_channels"] +
   pendingchannels["pending_force_closing_channels"] +
   pendingchannels["waiting_close_channels"])
-])
+if "commit_fee" in i])
 
 # All fees
 fees = chain_fees + commit_fees  # TODO: add Lightning relay fees spent
