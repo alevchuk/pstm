@@ -22,8 +22,20 @@ wallet_unconfirmed = int(wallet_balance["unconfirmed_balance"])
 limbo_balance = int(pendingchannels['total_limbo_balance'])  # The balance in satoshis encumbered in pending channels
 channel = int(channel_balance["balance"])
 chain_fees = sum([int(i["total_fees"]) for i in chain_txns])
-commit_fees = sum([int(i["commit_fee"]) for i in channels])  # Fees to be paid for commitment transactions
-fees = chain_fees + commit_fees  # TODO: add Lightning relay fees (1) spent; (2) earned
+
+# Fees to be paid for commitment transactions
+commit_fees = sum([int(i["commit_fee"]) for i in channels])
+commit_fees += sum([int(i["commit_fee"]) for i in (
+  pendingchannels["pending_open_channels"] +
+  pendingchannels["pending_closing_channels"] +
+  pendingchannels["pending_force_closing_channels"] +
+  pendingchannels["waiting_close_channels"])
+])
+
+# All fees
+fees = chain_fees + commit_fees  # TODO: add Lightning relay fees spent
+
+# TODO: add a column of funds earned from Lightning relay fees
 
 pending = int(channel_balance["pending_open_balance"]) + limbo_balance
 balance = wallet + wallet_unconfirmed + pending + channel
