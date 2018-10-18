@@ -37,7 +37,12 @@ fees = chain_fees + commit_fees  # TODO: add Lightning relay fees spent
 
 # TODO: add a column of funds earned from Lightning relay fees
 
-pending = int(channel_balance["pending_open_balance"]) + limbo_balance
+pending_htlcs = 0
+for ch in channels:
+  for htlc in ch.get("pending_htlcs", []):
+     pending_htlcs += int(htlc["amount"])
+
+pending = int(channel_balance["pending_open_balance"]) + limbo_balance + pending_htlcs
 balance = wallet + wallet_unconfirmed + pending + channel
 
 if len(sys.argv) == 0 or '--no-header' not in sys.argv:
