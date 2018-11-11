@@ -42,8 +42,8 @@ for ch in channels:
   for htlc in ch.get("pending_htlcs", []):
      pending_htlcs += int(htlc["amount"])
 
-pending = int(channel_balance["pending_open_balance"]) + limbo_balance + pending_htlcs
-balance = wallet + wallet_unconfirmed + pending + channel
+pending = wallet_unconfirmed + int(channel_balance["pending_open_balance"]) + limbo_balance + pending_htlcs
+balance = wallet + pending + channel
 
 if len(sys.argv) == 0 or '--no-header' not in sys.argv:
     print(
