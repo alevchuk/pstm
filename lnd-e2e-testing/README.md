@@ -382,15 +382,19 @@ lnd --externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 # On Debian, to get dig, you'll need to install the "dnsutils" package
 ```
 
-4. Test with netcat from a different host
-
+4. Test with netcat (nc) from a different host 
 ```
 echo hi | nc -v <external_ip_of_LND_host> 9735
 ```
 
+Alternetively to netcat you can use https://www.infobyip.com/tcpportchecker.php
+
+
 lnc logs will show
 
       2018-01-08 20:41:07.856 [ERR] CMGR: Can't accept connection: unexpected EOF
+      
+      
 
 
 # What's Next?
