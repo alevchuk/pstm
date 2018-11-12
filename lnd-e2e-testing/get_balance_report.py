@@ -43,7 +43,7 @@ for ch in channels:
      pending_htlcs += int(htlc["amount"])
 
 pending = wallet_unconfirmed + int(channel_balance["pending_open_balance"]) + limbo_balance + pending_htlcs
-balance = wallet + pending + channel
+balance = wallet + channel + pending
 
 if len(sys.argv) == 0 or '--no-header' not in sys.argv:
     print(
