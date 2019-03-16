@@ -30,8 +30,8 @@ This can also help testnet generate some payment traffic so we can test multihop
 # Do this on both A and B
 mkdir ~/lnd-e2e-testing/
 cd ~/lnd-e2e-testing/
-curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py > ./get_balance_report.py
-curl https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/pay_or_get_paid.py > ./pay_or_get_paid.py
+wget https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/get_balance_report.py
+wget https://raw.githubusercontent.com/alevchuk/pstm/master/lnd-e2e-testing/pay_or_get_paid.py
 chmod +x ./get_balance_report.py
 chmod +x ./pay_or_get_paid.py
 
