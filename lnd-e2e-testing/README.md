@@ -339,7 +339,7 @@ chmod +x ~/lnd-e2e-testing/get_balance_report.py
 ~/lnd-e2e-testing/get_balance_report.py >> ~/balance_history.tab
 
 # Track balance
-while :; do (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py ) | column -t; date; sleep 60; done
+while :; do echo; (cat ~/balance_history.tab; ~/lnd-e2e-testing/get_balance_report.py ) | column -t; date; sleep 60; done
 
 # Record balance
 ~/lnd-e2e-testing/get_balance_report.py | grep -v Time  >> ~/balance_history.tab
