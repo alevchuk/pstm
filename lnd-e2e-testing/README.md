@@ -66,12 +66,12 @@ echo "*filter
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
-COMMIT" | iptables-restore
+COMMIT" | sudo iptables-restore
 ```
 
 Persist firewall across reboots:
 
-    apt-get install iptables-persistent
+    sudo apt-get install iptables-persistent
     iptables-save  # show current rules
     # Copy rules to /etc/iptables/
     # Reboot to test persistence
@@ -79,7 +79,7 @@ Persist firewall across reboots:
 2. Run system updates regularly
 
 ```
-apt-get install aptitude
+sudo apt-get install aptitude
 sudo aptitude
 # press "/" to search for packages
 # press "+" to select a package for installing
