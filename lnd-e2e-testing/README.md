@@ -72,7 +72,7 @@ COMMIT" | sudo iptables-restore
 Persist firewall across reboots:
 
     sudo apt-get install iptables-persistent
-    iptables-save  # show current rules
+    sudo iptables-save  # show current rules
     # Copy rules to /etc/iptables/
     # Reboot to test persistence
 
