@@ -100,8 +100,9 @@ curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-g
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-metadata-get.sh > /.fs-metadata-get.sh
 chmod +x /.fs-metadata-get.sh
 git init
-# time git add .  # this may take a while
-# git commit -a -m 'first commit'
+
+time git add /  # this may take a while
+git commit -a -m 'first commit'
 
 /.fs-metadata-get.sh && git add --all / && git commit -a -m 'for example, LND Notes about SegWit addresses'
 ```
