@@ -1,3 +1,5 @@
+NOTE: This is the old doc, new doc is here https://github.com/alevchuk/minibank
+
 This is a step-by-step technical guide on how to setup [LND](https://github.com/lightningnetwork/lnd) with Autopilot in Bitcoin Testnet.
 
 Use-cases:
