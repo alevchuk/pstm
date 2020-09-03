@@ -109,7 +109,7 @@ git init
 time git add /  # this may take a while (~10 minutes)
 time git commit -a -m 'first commit'  # this may take a while
 
-/.fs-metadata-get.sh && git add --all / && git commit -a -m 'for example, LND Notes about SegWit addresses'
+time /.fs-metadata-get.sh && git add --all / && git commit -a -m 'for example, LND Notes about SegWit addresses'
 ```
 
 4. Make unix account for lightning
