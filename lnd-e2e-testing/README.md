@@ -99,8 +99,11 @@ cd /
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-gitignore > /.gitignore
 curl https://raw.githubusercontent.com/alevchuk/pstm/master/fs-time-machine/fs-metadata-get.sh > /.fs-metadata-get.sh
 chmod +x /.fs-metadata-get.sh
-git init
 
+git config --global user.email "$USER@$(hostname)"
+git config --global user.name "System"
+
+git init
 time git add /  # this may take a while
 git commit -a -m 'first commit'
 
